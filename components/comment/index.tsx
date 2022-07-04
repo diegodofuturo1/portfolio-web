@@ -25,29 +25,27 @@ class Style {
 }
 
 export interface CommentComponentProps {
-    comments: string[]
+    comments: { content: string, title: string }[]
 }
 
 const CommentComponent = (props: CommentComponentProps) => {
-    
+
     const style = new Style
 
     const render = () => {
         return props.comments.map((comment, index) => {
             return <Comment
-            key={`portifolio-comment-${index}`}
-            style={style.comment}
-            author={<a style={style.textcolor}>Diego Heleno</a>}
-            avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Diego Heleno" />}
-            content={
-                <p>{comment}</p>
-            }
-            datetime={
-                <Tooltip title={'Nasci há 29 anos'}>
-                    <span style={style.textcolor} >{'22/10/1992'}</span>
-                </Tooltip>
-            }
-        />
+                key={`portifolio-comment-${index}`}
+                style={style.comment}
+                author={<a style={style.textcolor}>Diego Heleno</a>}
+                avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Diego Heleno" />}
+                content={
+                    <p>{comment.content}</p>
+                }
+                datetime={
+                    <span style={style.textcolor} > - {comment.title}</span>
+                }
+            />
         })
     }
 

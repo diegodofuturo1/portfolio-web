@@ -1,5 +1,5 @@
 import 'antd/dist/antd.css';
-import { Layout } from "antd";
+import { Image, Layout, Row } from "antd";
 import { NextPage } from "next";
 import { CSSProperties } from 'react';
 import colors from "../../../utils/colors";
@@ -27,14 +27,30 @@ class Style {
         color: colors.gray[4],
         fontSize: '1.2EM'
     }
+
+    image: CSSProperties = {
+        height: '100px',
+        width: '100px',
+        borderRadius: '50%',
+        border: '1px solid black'
+    }
+
+    name: CSSProperties = {
+        color: colors.white,
+        fontSize: '2EM'
+    }
 }
 
 const style = new Style
 
-const PortifolioPage: NextPage = () => {
+const AboutPage: NextPage = () => {
     return <Layout style={style.layout}>
+        <Row justify='center'>
+            <Image style={style.image} src="https://joeschmoe.io/api/v1/random"  />  
+        </Row>
+        <Row style={style.name} justify='center'>Diego Heleno da Silva</Row>
         <CommentComponent comments={about} ></CommentComponent>
     </Layout>
 }
 
-export default PortifolioPage
+export default AboutPage

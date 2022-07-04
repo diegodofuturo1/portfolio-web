@@ -31,10 +31,10 @@ class Style {
 
 const style = new Style
 
-const PortifolioPage: NextPage = () => {
+const ExperiencePage: NextPage = () => {
     return <Layout style={style.layout}>
-        <CommentComponent comments={about} ></CommentComponent>
+        Experiência
     </Layout>
 }
 
-export default PortifolioPage
+export default ExperiencePage

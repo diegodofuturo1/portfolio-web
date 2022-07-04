@@ -3,8 +3,6 @@ import { Layout } from "antd";
 import { NextPage } from "next";
 import { CSSProperties } from 'react';
 import colors from "../../../utils/colors";
-import about from "../../../utils/texts/about";
-import CommentComponent from '../../../components/comment';
 
 class Style {
     layout: CSSProperties = {
@@ -31,10 +29,10 @@ class Style {
 
 const style = new Style
 
-const PortifolioPage: NextPage = () => {
+const EducationPage: NextPage = () => {
     return <Layout style={style.layout}>
-        <CommentComponent comments={about} ></CommentComponent>
+        Educação
     </Layout>
 }
 
-export default PortifolioPage
+export default EducationPage

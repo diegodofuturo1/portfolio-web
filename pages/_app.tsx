@@ -3,7 +3,7 @@ import colors from '../utils/colors';
 import { CSSProperties } from 'react';
 import { storeWrapper } from '../store';
 import type { AppProps } from 'next/app';
-import { Avatar, Col, Layout, Menu, Row } from 'antd'
+import { Affix, Avatar, Col, Layout, Menu, Row } from 'antd'
 import MenuItemComponent from '../components/menuitem';
 import { UserOutlined, InfoCircleOutlined, BookOutlined, ExperimentOutlined } from '@ant-design/icons';
 
@@ -42,27 +42,30 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Row align='middle' justify='center'>Meu Portifólio</Row>
           <Avatar size={32} icon={<UserOutlined />} />
         </Row>
+
         <Row>
           <Col style={style.col} xs={{ span: 23 }} sm={{ span: 23 }} md={{ span: 23 }} lg={{ span: 20 }} xl={{ span: 16 }} xxl={{ span: 12 }}>
-            <Menu theme='dark' mode={"horizontal"} style={style.menu}>
-              <MenuItemComponent 
-                id="about" 
-                icon={<InfoCircleOutlined />} 
-                text="Sobre Mim"
-              />
-              
-              <MenuItemComponent 
-                id="education" 
-                icon={<BookOutlined />} 
-                text="Educação"
-              />
-              
-              <MenuItemComponent 
-                id="experience" 
-                icon={<ExperimentOutlined />} 
-                text="Experiencia"
-              />
-            </ Menu>
+            <Affix>
+              <Menu theme='dark' mode={"horizontal"} style={style.menu}>
+                <MenuItemComponent
+                  id="about"
+                  icon={<InfoCircleOutlined />}
+                  text="Sobre Mim"
+                />
+
+                <MenuItemComponent
+                  id="education"
+                  icon={<BookOutlined />}
+                  text="Educação"
+                />
+
+                <MenuItemComponent
+                  id="experience"
+                  icon={<ExperimentOutlined />}
+                  text="Experiencia"
+                />
+              </ Menu>
+            </Affix>
             <Component {...pageProps} />
           </Col>
         </Row>
