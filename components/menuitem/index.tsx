@@ -58,7 +58,7 @@ const MenuItemComponent = (props: MenuItemComponentProps) => {
     ><Link href={`/portifolio/${id}`}>{text}</Link>
     </Menu.Item>
 
-    const { hover, selected } = useSelector((state: any) => { console.log('STATE', state); return state.menu })
+    const { hover, selected } = useSelector((state: any) => state.menu)
     const [component, setComponent] = useState(render(style.menuitem))
     const [css, setCss] = useState(style.menuitem)
 

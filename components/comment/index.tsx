@@ -33,8 +33,9 @@ const CommentComponent = (props: CommentComponentProps) => {
     const style = new Style
 
     const render = () => {
-        return props.comments.map(comment => {
+        return props.comments.map((comment, index) => {
             return <Comment
+            key={`portifolio-comment-${index}`}
             style={style.comment}
             author={<a style={style.textcolor}>Diego Heleno</a>}
             avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Diego Heleno" />}
