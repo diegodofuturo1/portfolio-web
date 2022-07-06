@@ -1,0 +1,9 @@
+.custom {
+    background-color: #AAA;
+    padding: 0px;
+}
+
+.custom .ant-collapse-content {
+    padding: 0px;
+    background-color: #AAA;
+}
