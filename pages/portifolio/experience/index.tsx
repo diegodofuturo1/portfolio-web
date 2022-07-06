@@ -5,6 +5,7 @@ import { CSSProperties } from 'react';
 import colors from "../../../utils/colors";
 import about from "../../../utils/texts/about";
 import CommentComponent from '../../../components/comment';
+import ExperienceComponent from '../../../components/experience-display';
 
 class Style {
     layout: CSSProperties = {
@@ -33,7 +34,8 @@ const style = new Style
 
 const ExperiencePage: NextPage = () => {
     return <Layout style={style.layout}>
-        Experiência
+        {/* <ExperienceComponent image='https://mechomotive.com/wp-content/uploads/2021/06/wipro.jpg' /> */}
+        Experienbce
     </Layout>
 }
 

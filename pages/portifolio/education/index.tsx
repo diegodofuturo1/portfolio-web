@@ -18,7 +18,7 @@ const style = new Style
 const EducationPage: NextPage = () => {
 
     return <Layout style={style.layout}>
-       {educations.map((education: EducationComponentProps) => <EducationComponent {...education} />)} 
+       {educations.map((education: EducationComponentProps, index: number) => <EducationComponent key={`education-component-${index}`} {...education} />)} 
     </Layout>
 }
 
