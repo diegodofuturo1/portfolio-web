@@ -3,9 +3,8 @@ import { Layout } from "antd";
 import { NextPage } from "next";
 import { CSSProperties } from 'react';
 import colors from "../../../utils/colors";
-import about from "../../../utils/texts/about";
-import CommentComponent from '../../../components/comment';
-import ExperienceComponent from '../../../components/experience-display';
+import experiences from "../../../utils/texts/experience";
+import ExperienceComponent, { ExperienceComponentProps } from '../../../components/experience-display';
 
 class Style {
     layout: CSSProperties = {
@@ -34,8 +33,7 @@ const style = new Style
 
 const ExperiencePage: NextPage = () => {
     return <Layout style={style.layout}>
-        {/* <ExperienceComponent image='https://mechomotive.com/wp-content/uploads/2021/06/wipro.jpg' /> */}
-        Experienbce
+        {experiences.map((experience: ExperienceComponentProps, index: number) => <ExperienceComponent key={`experience-component-${index}`} {...experience} />)}
     </Layout>
 }
 

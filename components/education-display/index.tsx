@@ -71,8 +71,8 @@ const EducationComponent = (props: EducationComponentProps) => {
         headStyle={style.header}
         title={
             <HeaderCardComponent
-                school={school}
-                classroom={classroom}
+                title={school}
+                description={classroom}
                 src={image}
             />
         }>

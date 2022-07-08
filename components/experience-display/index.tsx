@@ -1,7 +1,9 @@
 import { CSSProperties } from "react"
 import colors from "../../utils/colors"
-import { Card, Descriptions, Row } from "antd"
+import SkillInfoComponent from "../skill-info"
 import HeaderCardComponent from "../card-header"
+import SkillComponent, { rating, SkillComponentProps } from "../skill"
+import { Card, Col, Descriptions, Badge, Row } from "antd"
 
 class Style {
     layout: CSSProperties = {
@@ -53,38 +55,85 @@ class Style {
 }
 
 export interface ExperienceComponentProps {
-    school: string
-    classroom: string
+    company: string
+    role: string
     image: string
-    nivel: string
     duration: string
-    period: string
+    from: string
+    to: string
     details: string
+    skills: { skill: string, rating: rating }[]
 }
 
 const style = new Style
 
 const ExperienceComponent = (props: ExperienceComponentProps) => {
-    const { school, classroom, image, nivel, duration, period, details } = props
+    const { company, role, image, duration, from, to, details, skills } = props
+
     return <Card
         style={style.card}
         headStyle={style.header}
         title={
             <HeaderCardComponent
-                school={school}
-                classroom={classroom}
+                title={company}
+                description={role}
                 src={image}
             />
         }>
         <Row justify='start'>
             <Descriptions style={style.description} size="small">
-                <Descriptions.Item style={style.descriptionItem} labelStyle={style.descriptionLabel} label="Nível"><Row style={style.descriptionContent}>{nivel}</Row></Descriptions.Item>
-                <Descriptions.Item style={style.descriptionItem} labelStyle={style.descriptionLabel} label="Duração"><Row style={style.descriptionContent}>{duration}</Row></Descriptions.Item>
-                <Descriptions.Item style={style.descriptionItem} labelStyle={style.descriptionLabel} label="Período"><Row style={style.descriptionContent}>{period}</Row></Descriptions.Item>
+            <Descriptions.Item 
+                    style={style.descriptionItem}
+                    labelStyle={style.descriptionLabel} 
+                    label="Duração"
+                >
+                    <Row
+                        style={style.descriptionContent}
+                        >{duration}
+                    </Row>
+                </Descriptions.Item>
+
+                <Descriptions.Item 
+                    style={style.descriptionItem}
+                    labelStyle={style.descriptionLabel} 
+                    label="De"
+                >
+                    <Row
+                        style={style.descriptionContent}
+                        >{from}
+                    </Row>
+                </Descriptions.Item>
+
+                <Descriptions.Item 
+                    style={style.descriptionItem}
+                    labelStyle={style.descriptionLabel} 
+                    label="Até"
+                >
+                    <Row
+                        style={style.descriptionContent}
+                        >{to}
+                    </Row>
+                </Descriptions.Item>
             </Descriptions>
+
             <Descriptions style={style.description} size="small">
                 <Descriptions.Item style={style.descriptionItem} labelStyle={style.descriptionLabel} label="Detalhes"><Row style={style.descriptionContent}>{details}</Row></Descriptions.Item>
             </Descriptions>
+
+            <Badge.Ribbon text={<SkillInfoComponent />}>
+            <Descriptions style={style.description} size="small">
+                
+                    <Descriptions.Item 
+                        style={style.descriptionItem}
+                        labelStyle={style.descriptionLabel}
+                        label="Habilidades Desenvolvidas"
+                        >
+                        <Col style={style.descriptionContent}>
+                        {skills.map((skill: SkillComponentProps, index: number) => <SkillComponent key={`skill-component-${index}`} {...skill} />)}
+                        </Col>
+                    </Descriptions.Item>
+                
+            </Descriptions></Badge.Ribbon>
         </Row>
     </Card>
 }

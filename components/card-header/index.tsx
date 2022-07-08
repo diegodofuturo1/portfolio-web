@@ -13,21 +13,21 @@ class Style {
 
 interface HeaderCardComponentProps {
     src: string
-    school: string
-    classroom: string
+    title: string
+    description: string
 }
 
 const HeaderCardComponent = (props: HeaderCardComponentProps) => {
     const style = new Style
-    const { src, school, classroom } = props
+    const { src, title, description } = props
     return <Row align='middle'>
-        <Image style={style.image} src={src} />
+        <Image style={style.image} src={src} alt="logo.png" />
         <Col>
             <Row style={style.headerRow}>
-                {school}
+                {title}
             </Row >
             <Row style={style.headerRow}>
-                {classroom}
+                {description}
             </Row>
         </Col>
     </Row>
