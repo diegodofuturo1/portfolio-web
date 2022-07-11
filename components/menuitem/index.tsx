@@ -48,16 +48,17 @@ const MenuItemComponent = (props: MenuItemComponentProps) => {
     const style = new Style
     const dispatcher = new Dispatcher(useDispatch())
 
-    const render = (style: CSSProperties) => <Menu.Item
-        key={id}
-        icon={icon}
-        style={style}
-        onMouseEnter={() => sethover(id)}
-        onMouseLeave={() => sethover('')}
-        onClick={() => setSelected(id)}
-    ><Link href={`/portifolio/${id}`}>{text}</Link>
-    </Menu.Item>
-
+    const render = (style: CSSProperties) => {
+       return <Menu.Item
+            key={id}
+            icon={icon}
+            style={style}
+            onMouseEnter={event => {event.domEvent.currentTarget.classList.remove('ant-menu-item-selected'); sethover(id)}}
+            onMouseLeave={event => {event.domEvent.currentTarget.classList.remove('ant-menu-item-selected');sethover('')}}
+            onClick={event => {event.domEvent.currentTarget.classList.remove('ant-menu-item-selected');setSelected(id)}}
+        ><Link href={`/portifolio/${id}`}>{text}</Link>
+        </Menu.Item>
+    }
     const { hover, selected } = useSelector((state: any) => state.menu)
     const [component, setComponent] = useState(render(style.menuitem))
     const [css, setCss] = useState(style.menuitem)
