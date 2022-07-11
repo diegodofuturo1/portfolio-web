@@ -9,7 +9,7 @@ export interface PortifolioState {
 
 const initialState: PortifolioState = {
     hover: '',
-    selected: 'about'
+    selected: ''
 }
 
 const reducer = (state: PortifolioState = initialState, action: any) => {
@@ -18,6 +18,7 @@ const reducer = (state: PortifolioState = initialState, action: any) => {
             return { ...state, hover: action.payload }
             
         case MENU_SELECTED_CHANGE:
+            localStorage.setItem('selected', action.payload)
             return { ...state, selected: action.payload }
         default:
             return state

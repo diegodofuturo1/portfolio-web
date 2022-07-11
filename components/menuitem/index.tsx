@@ -65,10 +65,16 @@ const MenuItemComponent = (props: MenuItemComponentProps) => {
     const sethover = (newMenuHover: MenuType) => {
         dispatcher.menu.hoverChange(newMenuHover)
     }
-    
+
     const setSelected = (newMenuSelected: MenuType) => {
         dispatcher.menu.selectedChange(newMenuSelected)
     }
+
+    useEffect(() => {
+        const _selected = localStorage.getItem('selected') as MenuType
+        if (!selected && _selected)
+            dispatcher.menu.selectedChange(_selected)
+    }, [selected])
 
     useEffect(() => {
         let css: CSSProperties = style.menuitem
