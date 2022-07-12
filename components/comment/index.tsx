@@ -38,7 +38,7 @@ const CommentComponent = (props: CommentComponentProps) => {
                 key={`portifolio-comment-${index}`}
                 style={style.comment}
                 author={<a style={style.textcolor}>Diego Heleno</a>}
-                avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Diego Heleno" />}
+                avatar={<Avatar src="https://diegoheleno.s3.us-east-2.amazonaws.com/public/diego-heleno.jpg" alt="Diego Heleno" />}
                 content={
                     <p>{comment.content}</p>
                 }

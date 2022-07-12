@@ -1,11 +1,13 @@
 import '../styles/globals.css'
+import Link from 'next/link';
 import colors from '../utils/colors';
 import { CSSProperties } from 'react';
 import { storeWrapper } from '../store';
 import type { AppProps } from 'next/app';
-import { Affix, Avatar, Col, Layout, Menu, Row } from 'antd'
 import MenuItemComponent from '../components/menuitem';
-import { UserOutlined, InfoCircleOutlined, BookOutlined, ExperimentOutlined } from '@ant-design/icons';
+import { Content, Footer } from 'antd/lib/layout/layout';
+import { Affix, Avatar, Col, Layout, Menu, message, Row } from 'antd'
+import { UserOutlined, InfoCircleOutlined, BookOutlined, ExperimentOutlined, LinkedinOutlined, WhatsAppOutlined, FilePdfOutlined, GoogleOutlined } from '@ant-design/icons';
 
 class Style {
   col: CSSProperties = {
@@ -29,6 +31,24 @@ class Style {
     minHeight: '100vh',
     minWidth: '400px'
   }
+
+  footer: CSSProperties = {
+    padding: '0px',
+    color: colors.white,
+    backgroundColor: colors.gray[9],
+  }
+
+  icon: CSSProperties = {
+    color: colors.white,
+    backgroundColor: colors.gray[9],
+    fontSize: '1.2EM',
+    margin: '20px 5px 20px 50px'
+  }
+
+  link: CSSProperties = {
+    color: colors.white,
+    cursor: 'pointer',
+  }
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -38,12 +58,14 @@ function MyApp({ Component, pageProps }: AppProps) {
   return <Row style={{ margin: '0px', height: '100%' }}>
     <Col span={24}>
       <Layout style={style.layout}>
-        <Row align='middle' justify='space-between' style={style.header}>
-          <Row align='middle' justify='center'>Meu Portifólio</Row>
-          <Avatar size={32} icon={<UserOutlined />} />
-        </Row>
+        <Affix>
+          <Row align='middle' justify='space-between' style={style.header}>
+            <Row align='middle' justify='center'>Meu Portifólio</Row>
+            <Avatar size={32} icon={<UserOutlined />} />
+          </Row>
+        </Affix>
 
-        <Row>
+        <Content>
           <Col style={style.col} xs={{ span: 23 }} sm={{ span: 23 }} md={{ span: 23 }} lg={{ span: 20 }} xl={{ span: 16 }} xxl={{ span: 12 }}>
             <Affix>
               <Menu theme='dark' mode={"horizontal"} style={style.menu}>
@@ -62,13 +84,57 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <MenuItemComponent
                   id="experience"
                   icon={<ExperimentOutlined />}
-                  text="Experiencia"
+                  text="Experiência"
                 />
               </ Menu>
             </Affix>
             <Component {...pageProps} />
           </Col>
-        </Row>
+        </Content>
+        <Affix offsetBottom={0}>
+          <Footer style={style.footer}>
+            <Row justify='center' align='middle'>
+              <Row align='middle'>
+                <LinkedinOutlined style={style.icon} />
+                <Link
+                  style={style.link}
+                  target='_blank'
+                  href={'https://www.linkedin.com/in/diego-heleno-3b4615152/'}>
+                  <span style={style.link}>Linkedin</span>
+                </Link>
+              </Row>
+              <Row align='middle'>
+                <WhatsAppOutlined style={style.icon} />
+                <Link
+                  style={style.link}
+                  target='_blank'
+                  href={'whatsapp://send?phone=+5511949656506'}>
+                  <span style={style.link}>WhatsApp</span>
+                </Link>
+              </Row>
+              <Row align='middle'>
+                <GoogleOutlined style={style.icon} />
+                <Link
+                  href={'#'}
+                  ><span onClick={() => {
+                    navigator.clipboard.writeText('diegodofuturo1@gmail.com');
+                    message.success('Email "diegodofuturo1@gmail.com" copiado com sucesso')
+                  }}
+                    style={style.link}
+                  >Gmail</span>
+                </Link>
+              </Row>
+              <Row align='middle'>
+                <FilePdfOutlined style={style.icon} />
+                <Link
+                  target='_blank'
+                  href={'https://diegoheleno.s3.us-east-2.amazonaws.com/public/diego-heleno.curriculo.20220711.pdf'}>
+                  <span style={style.link}>Currículo</span>
+                </Link>
+              </Row>
+            </Row>
+          </Footer>
+        </Affix>
       </Layout>
     </Col>
   </Row>

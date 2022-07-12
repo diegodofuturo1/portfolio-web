@@ -2,7 +2,7 @@ export default [
   {
     title: 'Dados Pessoais',
     content: `
-    Olá, meu nome é Diego. E que bom que você quer me conhecer um pouco. Bom, tenho 29 anos, sou brasileiro, nascido e criado em uma das periferias de São Paulo. Não sou casado mas estou em um relacionamento desde 2013, não tenho filhos nem pets. No tempo livre gosto de jogos, séries, ler algums livros e como principal atividade fisica eu gosto de ciclismo.
+    Olá, meu nome é Diego. E que bom que você quer me conhecer um pouco. Bom, tenho 29 anos, sou brasileiro, nascido e criado em uma das periferias de São Paulo. Não sou casado, mas estou em um relacionamento desde 2013, não tenho filhos nem pets. No tempo livre gosto de jogos, séries, ler alguns livros e como principal atividade física eu gosto de ciclismo.
   `
   }, {
     title: 'Começo da carreira',

@@ -46,7 +46,7 @@ const style = new Style
 const AboutPage: NextPage = () => {
     return <Layout style={style.layout}>
         <Row justify='center'>
-            <Image style={style.image} alt="diego-heleno.png" src="https://joeschmoe.io/api/v1/random"  />  
+            <Image style={style.image} alt="diego-heleno.png" src="https://diegoheleno.s3.us-east-2.amazonaws.com/public/diego-heleno.jpg"  />  
         </Row>
         <Row style={style.name} justify='center'>Diego Heleno da Silva</Row>
         <CommentComponent comments={about} ></CommentComponent>
