@@ -96,41 +96,39 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Row justify='center' align='middle'>
               <Row align='middle'>
                 <LinkedinOutlined style={style.icon} />
-                <Link
+                <a
                   style={style.link}
                   target='_blank'
                   href={'https://www.linkedin.com/in/diego-heleno-3b4615152/'}>
-                  <span style={style.link}>Linkedin</span>
-                </Link>
+                  Linkedin
+                </a>
               </Row>
               <Row align='middle'>
                 <WhatsAppOutlined style={style.icon} />
-                <Link
+                <a
                   style={style.link}
                   target='_blank'
-                  href={'whatsapp://send?phone=+5511949656506'}>
-                  <span style={style.link}>WhatsApp</span>
-                </Link>
+                  href={'whatsapp://send?phone=+5511991198744'}>
+                  WhatsApp
+                </a>
               </Row>
               <Row align='middle'>
                 <GoogleOutlined style={style.icon} />
-                <Link
-                  href={'#'}
-                  ><span onClick={() => {
-                    navigator.clipboard.writeText('diegodofuturo1@gmail.com');
-                    message.success('Email "diegodofuturo1@gmail.com" copiado com sucesso')
-                  }}
-                    style={style.link}
-                  >Gmail</span>
-                </Link>
+                <a onClick={() => {
+                  navigator.clipboard.writeText('diegodofuturo1@gmail.com');
+                  message.success('Email "diegodofuturo1@gmail.com" copiado com sucesso')
+                }}
+                  style={style.link}
+                >Gmail</a>
               </Row>
               <Row align='middle'>
                 <FilePdfOutlined style={style.icon} />
-                <Link
+                <a
                   target='_blank'
+                  style={style.link}
                   href={'https://diegoheleno.s3.us-east-2.amazonaws.com/public/diego-heleno.curriculo.20220711.pdf'}>
-                  <span style={style.link}>Currículo</span>
-                </Link>
+                  Currículo
+                </a>
               </Row>
             </Row>
           </Footer>
