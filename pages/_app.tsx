@@ -99,6 +99,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <a
                   style={style.link}
                   target='_blank'
+                  rel='noreferrer'
                   href={'https://www.linkedin.com/in/diego-heleno-3b4615152/'}>
                   Linkedin
                 </a>
@@ -108,6 +109,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <a
                   style={style.link}
                   target='_blank'
+                  rel='noreferrer'
                   href={'whatsapp://send?phone=+5511991198744'}>
                   WhatsApp
                 </a>
@@ -125,6 +127,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <FilePdfOutlined style={style.icon} />
                 <a
                   target='_blank'
+                  rel='noreferrer'
                   style={style.link}
                   href={'https://diegoheleno.s3.us-east-2.amazonaws.com/public/diego-heleno.curriculo.20220711.pdf'}>
                   Currículo
