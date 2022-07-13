@@ -1,5 +1,5 @@
-import { Col, Menu } from "antd"
 import Link from "next/link"
+import { Col, Row } from "antd"
 import colors from "../../utils/colors"
 import { Dispatcher } from "../../store/dispathers"
 import { MenuType } from "../../store/reducers/menu"
@@ -7,20 +7,27 @@ import { useDispatch, useSelector } from "react-redux"
 import { CSSProperties, ReactNode, useEffect, useState } from "react"
 
 class Style {
-    menuitem: CSSProperties = {
+    menu: CSSProperties = {
+        cursor: 'pointer',
+        minWidth: '120px',
         color: colors.white,
+    }
+
+    menuitem: CSSProperties = {
+        ...this.menu,
         backgroundColor: colors.gray[9],
         border: `1px solid ${colors.gray[9]}`,
     }
 
     menuitemHover: CSSProperties = {
-        color: colors.white,
+        ...this.menu,
         backgroundColor: colors.gray[8],
         border: `1px solid ${colors.gray[7]}`,
     }
 
     menuitemSelected: CSSProperties = {
-        color: colors.white,
+        ...this.menu,
+        backgroundColor: colors.gray[9],
         borderTop: `1px solid ${colors.gray[9]}`,
         borderLeft: `1px solid ${colors.gray[9]}`,
         borderRight: `1px solid ${colors.gray[9]}`,
@@ -28,13 +35,15 @@ class Style {
     }
 
     menuitemSelectedHover: CSSProperties = {
-        color: colors.white,
+        ...this.menu,
         backgroundColor: colors.gray[8],
         borderTop: `1px solid ${colors.gray[7]}`,
         borderLeft: `1px solid ${colors.gray[7]}`,
         borderRight: `1px solid ${colors.gray[7]}`,
         borderBottom: `5px solid ${colors.gray[7]}`,
     }
+
+    span: CSSProperties = { margin: '10px 3px' }
 }
 
 interface MenuItemComponentProps {
@@ -47,7 +56,7 @@ const MenuItemComponent = (props: MenuItemComponentProps) => {
     const { id, text, icon } = props
     const style = new Style
     const dispatcher = new Dispatcher(useDispatch())
-
+    
     const { hover, selected } = useSelector((state: any) => state.menu)
     const [css, setCss] = useState(style.menuitem)
 
@@ -78,15 +87,20 @@ const MenuItemComponent = (props: MenuItemComponentProps) => {
         setCss(css)
     }, [hover, selected])
 
-    return <Menu.Item
+    return <Col
         key={id}
-        icon={icon}
         style={css}
-        onMouseEnter={event => { event.domEvent.currentTarget.classList.remove('ant-menu-item-selected'); sethover(id) }}
-        onMouseLeave={event => { event.domEvent.currentTarget.classList.remove('ant-menu-item-selected'); sethover('') }}
-        onClick={event => { event.domEvent.currentTarget.classList.remove('ant-menu-item-selected'); setSelected(id) }}
-    ><Link href={`/portifolio/${id}`}>{text}</Link>
-    </Menu.Item>
+        onMouseEnter={() => sethover(id)}
+        onMouseLeave={() => sethover('')}
+        onClick={() => setSelected(id)}
+    >
+        <Link href={`/portifolio/${id}`}>
+            <Row align="middle" justify="center">
+                <span style={style.span}>{icon}</span>
+                <span style={style.span}>{text}</span>
+            </Row>
+        </Link>
+    </Col>
 }
 
 export default MenuItemComponent

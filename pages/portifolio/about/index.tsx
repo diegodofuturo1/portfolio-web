@@ -9,7 +9,7 @@ import CommentComponent from '../../../components/comment';
 class Style {
     layout: CSSProperties = {
         height: '100%',
-        padding: '20px',
+        padding: '20px 0px',
         backgroundColor: colors.gray[6],
     }
 

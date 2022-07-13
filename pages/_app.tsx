@@ -1,18 +1,17 @@
 import '../styles/globals.css'
-import Link from 'next/link';
 import colors from '../utils/colors';
 import { CSSProperties } from 'react';
 import { storeWrapper } from '../store';
 import type { AppProps } from 'next/app';
 import MenuItemComponent from '../components/menuitem';
 import { Content, Footer } from 'antd/lib/layout/layout';
-import { Affix, Avatar, Col, Layout, Menu, message, Row } from 'antd'
-import { UserOutlined, InfoCircleOutlined, BookOutlined, ExperimentOutlined, LinkedinOutlined, WhatsAppOutlined, FilePdfOutlined, GoogleOutlined } from '@ant-design/icons';
+import { Affix, Avatar, Col, Layout, message, Row } from 'antd'
+import { UserOutlined, InfoCircleOutlined, BookOutlined, ExperimentOutlined, LinkedinOutlined, WhatsAppOutlined, FilePdfOutlined, GoogleOutlined, GithubOutlined } from '@ant-design/icons';
 
 class Style {
   col: CSSProperties = {
     margin: '20px auto',
-    height: '100%'
+    height: '100%',
   }
 
   menu: CSSProperties = {
@@ -21,7 +20,7 @@ class Style {
   }
 
   header: CSSProperties = {
-    padding: '10px',
+    padding: '10px 20px',
     color: colors.white,
     backgroundColor: colors.gray[9],
   }
@@ -38,16 +37,21 @@ class Style {
     backgroundColor: colors.gray[9],
   }
 
+  footeritem: CSSProperties = {
+    margin: '0px 10px'
+  }
+
   icon: CSSProperties = {
     color: colors.white,
     backgroundColor: colors.gray[9],
     fontSize: '1.2EM',
-    margin: '20px 5px 20px 50px'
+    margin: '10px 2px',
   }
 
   link: CSSProperties = {
     color: colors.white,
     cursor: 'pointer',
+    margin: '10px 2px',
   }
 }
 
@@ -68,7 +72,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Content>
           <Col style={style.col} xs={{ span: 23 }} sm={{ span: 23 }} md={{ span: 23 }} lg={{ span: 20 }} xl={{ span: 16 }} xxl={{ span: 12 }}>
             <Affix>
-              <Menu theme='dark' mode={"horizontal"} style={style.menu}>
+              <Row style={style.menu}>
                 <MenuItemComponent
                   id="about"
                   icon={<InfoCircleOutlined />}
@@ -86,7 +90,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                   icon={<ExperimentOutlined />}
                   text="Experiência"
                 />
-              </ Menu>
+              </ Row>
             </Affix>
             <Component {...pageProps} />
           </Col>
@@ -94,45 +98,66 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Affix offsetBottom={0}>
           <Footer style={style.footer}>
             <Row justify='center' align='middle'>
-              <Row align='middle'>
-                <LinkedinOutlined style={style.icon} />
-                <a
-                  style={style.link}
-                  target='_blank'
-                  rel='noreferrer'
-                  href={'https://www.linkedin.com/in/diego-heleno-3b4615152/'}>
-                  Linkedin
-                </a>
-              </Row>
-              <Row align='middle'>
-                <WhatsAppOutlined style={style.icon} />
-                <a
-                  style={style.link}
-                  target='_blank'
-                  rel='noreferrer'
-                  href={'whatsapp://send?phone=+5511991198744'}>
-                  WhatsApp
-                </a>
-              </Row>
-              <Row align='middle'>
-                <GoogleOutlined style={style.icon} />
-                <a onClick={() => {
-                  navigator.clipboard.writeText('diegodofuturo1@gmail.com');
-                  message.success('Email "diegodofuturo1@gmail.com" copiado com sucesso')
-                }}
-                  style={style.link}
-                >Gmail</a>
-              </Row>
-              <Row align='middle'>
-                <FilePdfOutlined style={style.icon} />
-                <a
-                  target='_blank'
-                  rel='noreferrer'
-                  style={style.link}
-                  href={'https://diegoheleno.s3.us-east-2.amazonaws.com/public/diego-heleno.curriculo.20220711.pdf'}>
-                  Currículo
-                </a>
-              </Row>
+              <Col>
+                <Row align='middle' style={style.footeritem}>
+                  <LinkedinOutlined style={style.icon} />
+                  <a
+                    style={style.link}
+                    target='_blank'
+                    rel='noreferrer'
+                    href={'https://www.linkedin.com/in/diego-heleno-3b4615152/'}>
+                    Linkedin
+                  </a>
+                </Row>
+              </Col>
+              <Col>
+                <Row align='middle' style={style.footeritem}>
+                  <WhatsAppOutlined style={style.icon} />
+                  <a
+                    style={style.link}
+                    target='_blank'
+                    rel='noreferrer'
+                    href={'whatsapp://send?phone=+5511991198744'}>
+                    WhatsApp
+                  </a>
+                </Row>
+              </Col>
+              <Col>
+                <Row align='middle' style={style.footeritem}>
+                  <GoogleOutlined style={style.icon} />
+                  <a onClick={() => {
+                    navigator.clipboard.writeText('diegodofuturo1@gmail.com');
+                    message.success('Email "diegodofuturo1@gmail.com" copiado com sucesso')
+                  }}
+                    style={style.link}
+                  >Gmail</a>
+                </Row>
+              </Col>
+              <Col>
+                <Row align='middle' style={style.footeritem}>
+                  <FilePdfOutlined style={style.icon} />
+                  <a
+                    target='_blank'
+                    rel='noreferrer'
+                    style={style.link}
+                    href={'https://diegoheleno.s3.us-east-2.amazonaws.com/public/diego-heleno.curriculo.20220711.pdf'}>
+                    Currículo
+                  </a>
+                </Row>
+              </Col>
+              
+              <Col>
+                <Row align='middle' style={style.footeritem}>
+                  <GithubOutlined style={style.icon} />
+                  <a
+                    target='_blank'
+                    rel='noreferrer'
+                    style={style.link}
+                    href={'https://github.com/diegodofuturo1?tab=repositories'}>
+                    GitHub
+                  </a>
+                </Row>
+              </Col>
             </Row>
           </Footer>
         </Affix>
