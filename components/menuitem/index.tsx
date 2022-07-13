@@ -94,7 +94,7 @@ const MenuItemComponent = (props: MenuItemComponentProps) => {
         onMouseLeave={() => sethover('')}
         onClick={() => setSelected(id)}
     >
-        <Link href={`/portifolio/${id}`}>
+        <Link href={`/portfolio/${id}`}>
             <Row align="middle" justify="center">
                 <span style={style.span}>{icon}</span>
                 <span style={style.span}>{text}</span>

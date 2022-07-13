@@ -38,7 +38,7 @@ class Style {
   }
 
   footeritem: CSSProperties = {
-    margin: '0px 10px'
+    margin: '0px 20px'
   }
 
   icon: CSSProperties = {
@@ -64,7 +64,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Layout style={style.layout}>
         <Affix>
           <Row align='middle' justify='space-between' style={style.header}>
-            <Row align='middle' justify='center'>Meu Portifólio</Row>
+            <Row align='middle' justify='center'>Meu Portfólio</Row>
             <Avatar size={32} icon={<UserOutlined />} />
           </Row>
         </Affix>
@@ -117,7 +117,12 @@ function MyApp({ Component, pageProps }: AppProps) {
                     style={style.link}
                     target='_blank'
                     rel='noreferrer'
-                    href={'whatsapp://send?phone=+5511991198744'}>
+                    href={'whatsapp://send?phone=+5511991198744'}
+                    onClick={() => {
+                      navigator.clipboard.writeText('+5511991198744');
+                      message.success('Telefone "+5511991198744" copiado com sucesso')
+                    }}
+                    >
                     WhatsApp
                   </a>
                 </Row>

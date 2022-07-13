@@ -2,17 +2,17 @@ import { MENU_HOVER_CHANGE, MENU_SELECTED_CHANGE  } from "../../actions";
 
 export type MenuType = 'about' | 'education' | 'experience' | ''
 
-export interface PortifolioState {
+export interface PortfolioState {
     hover: MenuType,
     selected: MenuType
 }
 
-const initialState: PortifolioState = {
+const initialState: PortfolioState = {
     hover: '',
     selected: ''
 }
 
-const reducer = (state: PortifolioState = initialState, action: any) => {
+const reducer = (state: PortfolioState = initialState, action: any) => {
     switch (action.type) {
         case MENU_HOVER_CHANGE:
             return { ...state, hover: action.payload }
