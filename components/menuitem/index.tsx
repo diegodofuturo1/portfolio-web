@@ -1,106 +1,112 @@
-import Link from "next/link"
-import { Col, Row } from "antd"
-import colors from "../../utils/colors"
-import { Dispatcher } from "../../store/dispathers"
-import { MenuType } from "../../store/reducers/menu"
-import { useDispatch, useSelector } from "react-redux"
-import { CSSProperties, ReactNode, useEffect, useState } from "react"
+import Link from "next/link";
+import { Col, Row } from "antd";
+import colors from "../../utils/colors";
+import { Dispatcher } from "../../store/dispathers";
+import { MenuType } from "../../store/reducers/menu";
+import { useDispatch, useSelector } from "react-redux";
+import { CSSProperties, ReactNode, useEffect, useState } from "react";
+import { ThemeColor } from "../../store/reducers/theme";
 
 class Style {
-    menu: CSSProperties = {
-        cursor: 'pointer',
-        minWidth: '120px',
-        color: colors.white,
-    }
+  constructor(private readonly color: ThemeColor = "gray") {}
 
-    menuitem: CSSProperties = {
-        ...this.menu,
-        backgroundColor: colors.gray[9],
-        border: `1px solid ${colors.gray[9]}`,
-    }
+  menu: CSSProperties = {
+    cursor: "pointer",
+    minWidth: "120px",
+    color: colors.white,
+  };
 
-    menuitemHover: CSSProperties = {
-        ...this.menu,
-        backgroundColor: colors.gray[8],
-        border: `1px solid ${colors.gray[7]}`,
-    }
+  menuitem: CSSProperties = {
+    ...this.menu,
+    backgroundColor: colors[this.color][9],
+    border: `1px solid ${colors[this.color][9]}`,
+  };
 
-    menuitemSelected: CSSProperties = {
-        ...this.menu,
-        backgroundColor: colors.gray[9],
-        borderTop: `1px solid ${colors.gray[9]}`,
-        borderLeft: `1px solid ${colors.gray[9]}`,
-        borderRight: `1px solid ${colors.gray[9]}`,
-        borderBottom: `5px solid ${colors.gray[7]}`,
-    }
+  menuitemHover: CSSProperties = {
+    ...this.menu,
+    backgroundColor: colors[this.color][8],
+    border: `1px solid ${colors[this.color][7]}`,
+  };
 
-    menuitemSelectedHover: CSSProperties = {
-        ...this.menu,
-        backgroundColor: colors.gray[8],
-        borderTop: `1px solid ${colors.gray[7]}`,
-        borderLeft: `1px solid ${colors.gray[7]}`,
-        borderRight: `1px solid ${colors.gray[7]}`,
-        borderBottom: `5px solid ${colors.gray[7]}`,
-    }
+  menuitemSelected: CSSProperties = {
+    ...this.menu,
+    backgroundColor: colors[this.color][9],
+    borderTop: `1px solid ${colors[this.color][9]}`,
+    borderLeft: `1px solid ${colors[this.color][9]}`,
+    borderRight: `1px solid ${colors[this.color][9]}`,
+    borderBottom: `5px solid ${colors[this.color][7]}`,
+  };
 
-    span: CSSProperties = { margin: '10px 3px' }
+  menuitemSelectedHover: CSSProperties = {
+    ...this.menu,
+    backgroundColor: colors[this.color][8],
+    borderTop: `1px solid ${colors[this.color][7]}`,
+    borderLeft: `1px solid ${colors[this.color][7]}`,
+    borderRight: `1px solid ${colors[this.color][7]}`,
+    borderBottom: `5px solid ${colors[this.color][7]}`,
+  };
+
+  span: CSSProperties = { margin: "10px 3px" };
 }
 
 interface MenuItemComponentProps {
-    id: MenuType,
-    text: string,
-    icon: ReactNode
+  id: MenuType;
+  text: string;
+  icon: ReactNode;
 }
 
 const MenuItemComponent = (props: MenuItemComponentProps) => {
-    const { id, text, icon } = props
-    const style = new Style
-    const dispatcher = new Dispatcher(useDispatch())
-    
-    const { hover, selected } = useSelector((state: any) => state.menu)
-    const [css, setCss] = useState(style.menuitem)
+  const { id, text, icon } = props;
+  const dispatcher = new Dispatcher(useDispatch());
 
-    const sethover = (newMenuHover: MenuType) => {
-        dispatcher.menu.hoverChange(newMenuHover)
-    }
+  const {
+    menu: { hover, selected },
+    theme: { color },
+  } = useSelector((state: any) => state);
 
-    const setSelected = (newMenuSelected: MenuType) => {
-        dispatcher.menu.selectedChange(newMenuSelected)
-    }
+  const [style, setStyle] = useState(new Style(color));
+  const [css, setCss] = useState(style.menuitem);
+  const sethover = (newMenuHover: MenuType) => {
+    dispatcher.menu.hoverChange(newMenuHover);
+  };
 
-    useEffect(() => {
-        const _selected = localStorage.getItem('selected') as MenuType
-        if (!selected && _selected)
-            dispatcher.menu.selectedChange(_selected)
-    }, [selected])
+  const setSelected = (newMenuSelected: MenuType) => {
+    dispatcher.menu.selectedChange(newMenuSelected);
+  };
 
-    useEffect(() => {
-        let css: CSSProperties = style.menuitem
+  useEffect(() => {
+    const _selected = localStorage.getItem("selected") as MenuType;
+    if (!selected && _selected) dispatcher.menu.selectedChange(_selected);
+  }, [selected]);
 
-        if (selected == id && hover == id)
-            css = style.menuitemSelectedHover
-        else if (selected == id)
-            css = style.menuitemSelected
-        else if (hover == id)
-            css = style.menuitemHover
+  useEffect(() => {
+    let css: CSSProperties = style.menuitem;
 
-        setCss(css)
-    }, [hover, selected])
+    if (selected == id && hover == id) css = style.menuitemSelectedHover;
+    else if (selected == id) css = style.menuitemSelected;
+    else if (hover == id) css = style.menuitemHover;
 
-    return <Col
-        key={id}
-        style={css}
-        onMouseEnter={() => sethover(id)}
-        onMouseLeave={() => sethover('')}
-        onClick={() => setSelected(id)}
+    setCss(css);
+  }, [hover, selected, style]);
+
+  useEffect(() => setStyle(new Style(color)), [color]);
+
+  return (
+    <Col
+      key={id}
+      style={css}
+      onMouseEnter={() => sethover(id)}
+      onMouseLeave={() => sethover("")}
+      onClick={() => setSelected(id)}
     >
-        <Link href={`/portfolio/${id}`}>
-            <Row align="middle" justify="center">
-                <span style={style.span}>{icon}</span>
-                <span style={style.span}>{text}</span>
-            </Row>
-        </Link>
+      <Link href={`/portfolio/${id}`}>
+        <Row align="middle" justify="center">
+          <span style={style.span}>{icon}</span>
+          <span style={style.span}>{text}</span>
+        </Row>
+      </Link>
     </Col>
-}
+  );
+};
 
-export default MenuItemComponent
+export default MenuItemComponent;
