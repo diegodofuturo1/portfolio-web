@@ -1,18 +1,21 @@
-import { MENU_HOVER_CHANGE, MENU_SELECTED_CHANGE } from "../../actions";
+import {
+  MENU_HOVER_CHANGE,
+  MENU_SELECTED_CHANGE,
+} from "../actions/menu.action";
 
 export type MenuType = "about" | "education" | "experience" | "projects" | "";
 
-export interface PortfolioState {
+export interface MenuState {
   hover: MenuType;
   selected: MenuType;
 }
 
-const initialState: PortfolioState = {
+const initialState: MenuState = {
   hover: "",
   selected: "",
 };
 
-const reducer = (state: PortfolioState = initialState, action: any) => {
+const reducer = (state: MenuState = initialState, action: any) => {
   switch (action.type) {
     case MENU_HOVER_CHANGE:
       return { ...state, hover: action.payload };

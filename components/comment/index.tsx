@@ -1,7 +1,7 @@
 import { CSSProperties } from "react";
 import colors from "../../utils/colors";
 import { Comment, Avatar, Tooltip, Row } from "antd";
-import { ThemeColor } from "../../store/reducers/theme";
+import { ThemeColor } from "../../store/reducers/theme.reducer";
 import { Dispatcher } from "../../store/dispathers";
 import { useDispatch, useSelector } from "react-redux";
 

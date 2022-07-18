@@ -18,7 +18,7 @@ import {
   GithubOutlined,
   ProjectOutlined,
 } from "@ant-design/icons";
-import { ThemeColor } from "../store/reducers/theme";
+import { ThemeColor } from "../store/reducers/theme.reducer";
 import { useSelector } from "react-redux";
 import HeaderComponent from "../components/header";
 

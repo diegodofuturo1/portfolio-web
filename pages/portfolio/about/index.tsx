@@ -5,7 +5,7 @@ import { CSSProperties } from "react";
 import colors from "../../../utils/colors";
 import about from "../../../utils/texts/about";
 import CommentComponent from "../../../components/comment";
-import { ThemeColor } from "../../../store/reducers/theme";
+import { ThemeColor } from "../../../store/reducers/theme.reducer";
 import { useSelector } from "react-redux";
 
 class Style {

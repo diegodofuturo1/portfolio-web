@@ -1,8 +1,10 @@
 import { AnyAction, Dispatch } from "redux";
-import { menuHoverChange, menuSelectedChange } from "../actions/menu";
-import { themeColorChange } from "../actions/theme";
-import { MenuType } from "../reducers/menu";
-import { ThemeColor } from "../reducers/theme";
+import { UserDto } from "../../dtos/user.dto";
+import { MenuType } from "../reducers/menu.reducer";
+import { ThemeColor } from "../reducers/theme.reducer";
+import { themeColorChange } from "../actions/theme.action";
+import { currentUserChange, currentUserExit } from "../actions/user.action";
+import { menuHoverChange, menuSelectedChange } from "../actions/menu.action";
 
 export class Dispatcher {
   constructor(private readonly dispatch: Dispatch<AnyAction>) {}
@@ -15,5 +17,12 @@ export class Dispatcher {
 
   public theme = {
     colorChange: (color: ThemeColor) => this.dispatch(themeColorChange(color)),
+  };
+
+  public user = {
+    currentUserChange: (user: UserDto) =>
+      this.dispatch(currentUserChange(user)),
+
+    currentUserExit: () => this.dispatch(currentUserExit()),
   };
 }

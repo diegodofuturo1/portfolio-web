@@ -1,19 +1,18 @@
-import { Badge, Card, Col, Row } from "antd";
-import Meta from "antd/lib/card/Meta";
 import Router from "next/router";
-import { CSSProperties, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { text } from "stream/consumers";
-import { ThemeColor } from "../../store/reducers/theme";
+import Meta from "antd/lib/card/Meta";
 import colors from "../../utils/colors";
+import { useSelector } from "react-redux";
+import { Badge, Card, Col, Row } from "antd";
+import { CSSProperties, useEffect, useState } from "react";
+import { ThemeColor } from "../../store/reducers/theme.reducer";
 
 const colSpan = {
-  xs: { span: 12 },
+  xs: { span: 24 },
   sm: { span: 12 },
-  md: { span: 8 },
+  md: { span: 12 },
   lg: { span: 8 },
-  xl: { span: 6 },
-  xxl: { span: 6 },
+  xl: { span: 8 },
+  xxl: { span: 8 },
 };
 
 class Style {
@@ -58,6 +57,7 @@ const ProjectItemComponent = (props: ProjectItemComponentProps) => {
             backgroundColor: colors[color][7],
             border: `1px solid ${colors[color][6]}`,
             borderLeft: `10px solid ${colors[color][5]}`,
+            minHeight: "120px",
           }}
           bodyStyle={{}}
         >

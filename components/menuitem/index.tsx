@@ -2,10 +2,10 @@ import Link from "next/link";
 import { Col, Row } from "antd";
 import colors from "../../utils/colors";
 import { Dispatcher } from "../../store/dispathers";
-import { MenuType } from "../../store/reducers/menu";
+import { MenuType } from "../../store/reducers/menu.reducer";
 import { useDispatch, useSelector } from "react-redux";
 import { CSSProperties, ReactNode, useEffect, useState } from "react";
-import { ThemeColor } from "../../store/reducers/theme";
+import { ThemeColor } from "../../store/reducers/theme.reducer";
 
 class Style {
   constructor(private readonly color: ThemeColor = "gray") {}

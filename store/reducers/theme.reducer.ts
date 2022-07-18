@@ -1,4 +1,4 @@
-import { THEME_COLOR_CHANGE } from "../../actions";
+import { THEME_COLOR_CHANGE } from "../actions/theme.action";
 
 export type ThemeColor =
   | "red"

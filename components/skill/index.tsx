@@ -1,6 +1,6 @@
 import { Progress, Row, Tag, Tooltip } from "antd";
 import { useSelector } from "react-redux";
-import { ThemeColor } from "../../store/reducers/theme";
+import { ThemeColor } from "../../store/reducers/theme.reducer";
 import colors from "../../utils/colors";
 
 export type rating = 1 | 2 | 3 | 4 | 5;

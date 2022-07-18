@@ -1,6 +1,6 @@
 import { Col, Row } from "antd";
 import { Dispatcher } from "../../store/dispathers";
-import { ThemeColor } from "../../store/reducers/theme";
+import { ThemeColor } from "../../store/reducers/theme.reducer";
 import { useDispatch, useSelector } from "react-redux";
 import colors from "../../utils/colors";
 

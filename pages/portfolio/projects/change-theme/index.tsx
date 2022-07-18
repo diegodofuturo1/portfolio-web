@@ -5,7 +5,7 @@ import { CSSProperties } from "react";
 import { Button, Layout, Row, Tooltip } from "antd";
 import { useSelector } from "react-redux";
 import colors, { colorList } from "../../../../utils/colors";
-import { ThemeColor } from "../../../../store/reducers/theme";
+import { ThemeColor } from "../../../../store/reducers/theme.reducer";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import ButtonColorComponent from "../../../../components/button-color";
 
@@ -21,7 +21,7 @@ class Style {
   button: CSSProperties = {
     color: colors[this.color][0],
     backgroundColor: colors[this.color][8],
-    margin: "0px 10px",
+    margin: "0px 5px",
   };
 }
 
@@ -42,6 +42,7 @@ const ChangeThemePage: NextPage = () => {
           fontSize: "1.2EM",
           fontWeight: "bolder",
           backgroundColor: colors[color][7],
+          borderLeft: `5px solid ${colors[color][5]}`,
         }}
       >
         <Tooltip title="Voltar">

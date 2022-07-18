@@ -7,7 +7,7 @@ import educations from "../../../utils/texts/education";
 import EducationComponent, {
   EducationComponentProps,
 } from "../../../components/education-display";
-import { ThemeColor } from "../../../store/reducers/theme";
+import { ThemeColor } from "../../../store/reducers/theme.reducer";
 import { useSelector } from "react-redux";
 class Style {
   constructor(private readonly color: ThemeColor = "gray") {}

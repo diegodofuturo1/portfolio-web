@@ -1,4 +1,4 @@
-import { ThemeColor } from "../../store/reducers/theme";
+import { ThemeColor } from "../../store/reducers/theme.reducer";
 
 export default {
   red: [

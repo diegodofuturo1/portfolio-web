@@ -4,7 +4,7 @@ import { Layout, Row } from "antd";
 import { CSSProperties } from "react";
 import { useSelector } from "react-redux";
 import colors from "../../../utils/colors";
-import { ThemeColor } from "../../../store/reducers/theme";
+import { ThemeColor } from "../../../store/reducers/theme.reducer";
 import ProjectItemComponent from "../../../components/project-item";
 
 class Style {

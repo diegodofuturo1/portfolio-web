@@ -2,7 +2,7 @@ import { CSSProperties } from "react";
 import colors from "../../utils/colors";
 import { Card, Descriptions, Row } from "antd";
 import HeaderCardComponent from "../card-header";
-import { ThemeColor } from "../../store/reducers/theme";
+import { ThemeColor } from "../../store/reducers/theme.reducer";
 import { useSelector } from "react-redux";
 
 class Style {

@@ -7,7 +7,7 @@ import experiences from "../../../utils/texts/experience";
 import ExperienceComponent, {
   ExperienceComponentProps,
 } from "../../../components/experience-display";
-import { ThemeColor } from "../../../store/reducers/theme";
+import { ThemeColor } from "../../../store/reducers/theme.reducer";
 import { useSelector } from "react-redux";
 
 class Style {

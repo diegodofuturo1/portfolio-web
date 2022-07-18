@@ -4,7 +4,7 @@ import SkillInfoComponent from "../skill-info";
 import HeaderCardComponent from "../card-header";
 import SkillComponent, { rating, SkillComponentProps } from "../skill";
 import { Card, Col, Descriptions, Badge, Row } from "antd";
-import { ThemeColor } from "../../store/reducers/theme";
+import { ThemeColor } from "../../store/reducers/theme.reducer";
 import { useSelector } from "react-redux";
 
 class Style {
