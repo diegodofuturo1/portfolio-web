@@ -20,7 +20,7 @@ class Style {
   constructor(private readonly color: ThemeColor = "gray") {}
 
   col: CSSProperties = {
-    padding: "5px",
+    padding: "5px 20px 5px 0px",
     height: "100%",
     transition: "color .3s ease-in-out, box-shadow .3s ease-in-out",
   };
@@ -57,6 +57,7 @@ const ProjectItemComponent = (props: ProjectItemComponentProps) => {
           style={{
             backgroundColor: colors[color][7],
             border: `1px solid ${colors[color][6]}`,
+            borderLeft: `10px solid ${colors[color][5]}`,
           }}
           bodyStyle={{}}
         >

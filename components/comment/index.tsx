@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 import colors from "../../utils/colors";
-import { Comment, Avatar, Tooltip } from "antd";
+import { Comment, Avatar, Tooltip, Row } from "antd";
 import { ThemeColor } from "../../store/reducers/theme";
 import { Dispatcher } from "../../store/dispathers";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,9 +18,9 @@ class Style {
     margin: "10px auto",
     backgroundColor: colors[this.color][7],
     padding: "5px 10px",
-    borderRadius: "10px",
     color: colors[this.color][2],
-    border: `1px solid ${colors[this.color][5]}`,
+    border: `1px solid ${colors[this.color][6]}`,
+    borderLeft: `12px solid ${colors[this.color][5]}`,
   };
 
   textcolor: CSSProperties = {
@@ -51,7 +51,7 @@ const CommentComponent = (props: CommentComponentProps) => {
               alt="Diego Heleno"
             />
           }
-          content={<p>{comment.content}</p>}
+          content={<Row>{comment.content}</Row>}
           datetime={<span style={style.textcolor}> - {comment.title}</span>}
         />
       );

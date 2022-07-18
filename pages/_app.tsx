@@ -5,7 +5,7 @@ import { storeWrapper } from "../store";
 import type { AppProps } from "next/app";
 import MenuItemComponent from "../components/menuitem";
 import { Content, Footer } from "antd/lib/layout/layout";
-import { Affix, Avatar, Col, Layout, message, Row } from "antd";
+import { Affix, Avatar, Button, Col, Layout, message, Row } from "antd";
 import {
   UserOutlined,
   InfoCircleOutlined,
@@ -20,6 +20,7 @@ import {
 } from "@ant-design/icons";
 import { ThemeColor } from "../store/reducers/theme";
 import { useSelector } from "react-redux";
+import HeaderComponent from "../components/header";
 
 class Style {
   constructor(private readonly color: ThemeColor = "gray") {}
@@ -31,12 +32,6 @@ class Style {
 
   menu: CSSProperties = {
     borderRadius: "5px 5px 0px 0px",
-    backgroundColor: colors[this.color][9],
-  };
-
-  header: CSSProperties = {
-    padding: "10px 20px",
-    color: colors.white,
     backgroundColor: colors[this.color][9],
   };
 
@@ -78,13 +73,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <Row style={{ margin: "0px", height: "100%" }}>
       <Col span={24}>
         <Layout style={style.layout}>
-          <Row align="middle" justify="space-between" style={style.header}>
-            <Row align="middle" justify="center">
-              Meu Portfólio
-            </Row>
-            <Avatar size={32} icon={<UserOutlined />} />
-          </Row>
-
+          <HeaderComponent />
           <Content style={{ minHeight: "100vh" }}>
             <Col
               style={style.col}
@@ -95,32 +84,30 @@ function MyApp({ Component, pageProps }: AppProps) {
               xl={{ span: 16 }}
               xxl={{ span: 12 }}
             >
-              <Affix>
-                <Row style={style.menu}>
-                  <MenuItemComponent
-                    id="projects"
-                    icon={<ProjectOutlined />}
-                    text="Projetos"
-                  />
-                  <MenuItemComponent
-                    id="about"
-                    icon={<InfoCircleOutlined />}
-                    text="Sobre Mim"
-                  />
+              <Row style={style.menu}>
+                <MenuItemComponent
+                  id="projects"
+                  icon={<ProjectOutlined />}
+                  text="Projetos"
+                />
+                <MenuItemComponent
+                  id="about"
+                  icon={<InfoCircleOutlined />}
+                  text="Sobre Mim"
+                />
 
-                  <MenuItemComponent
-                    id="education"
-                    icon={<BookOutlined />}
-                    text="Educação"
-                  />
+                <MenuItemComponent
+                  id="education"
+                  icon={<BookOutlined />}
+                  text="Educação"
+                />
 
-                  <MenuItemComponent
-                    id="experience"
-                    icon={<ExperimentOutlined />}
-                    text="Experiência"
-                  />
-                </Row>
-              </Affix>
+                <MenuItemComponent
+                  id="experience"
+                  icon={<ExperimentOutlined />}
+                  text="Experiência"
+                />
+              </Row>
               <Component {...pageProps} />
             </Col>
           </Content>

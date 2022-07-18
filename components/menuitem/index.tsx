@@ -34,7 +34,7 @@ class Style {
     borderTop: `1px solid ${colors[this.color][9]}`,
     borderLeft: `1px solid ${colors[this.color][9]}`,
     borderRight: `1px solid ${colors[this.color][9]}`,
-    borderBottom: `5px solid ${colors[this.color][7]}`,
+    borderBottom: `5px solid ${colors[this.color][5]}`,
   };
 
   menuitemSelectedHover: CSSProperties = {
@@ -43,7 +43,7 @@ class Style {
     borderTop: `1px solid ${colors[this.color][7]}`,
     borderLeft: `1px solid ${colors[this.color][7]}`,
     borderRight: `1px solid ${colors[this.color][7]}`,
-    borderBottom: `5px solid ${colors[this.color][7]}`,
+    borderBottom: `5px solid ${colors[this.color][5]}`,
   };
 
   span: CSSProperties = { margin: "10px 3px" };

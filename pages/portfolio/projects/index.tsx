@@ -1,12 +1,10 @@
 import "antd/dist/antd.css";
 import { NextPage } from "next";
-import Router from "next/router";
-import Meta from "antd/lib/card/Meta";
+import { Layout, Row } from "antd";
+import { CSSProperties } from "react";
 import { useSelector } from "react-redux";
 import colors from "../../../utils/colors";
-import { Layout, Card, Col, Row, Badge } from "antd";
 import { ThemeColor } from "../../../store/reducers/theme";
-import { CSSProperties, useEffect, useState } from "react";
 import ProjectItemComponent from "../../../components/project-item";
 
 class Style {
