@@ -174,7 +174,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                       rel="noreferrer"
                       style={style.link}
                       href={
-                        "https://diegoheleno.s3.us-east-2.amazonaws.com/public/diego-heleno.curriculo.20220711.pdf"
+                        "https://diegoheleno.s3.us-east-2.amazonaws.com/public/diego-heleno.curriculo.20220726.pdf"
                       }
                     >
                       Currículo
