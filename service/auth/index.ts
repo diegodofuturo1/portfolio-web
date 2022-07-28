@@ -3,8 +3,7 @@ import { message } from "antd";
 import { SignInDto } from "../../dtos/signin.dto";
 import { SignUpDto } from "../../dtos/signup.dto";
 
-const url =
-  "http://portifolioapi-env-1.eba-5emtvhrj.us-east-1.elasticbeanstalk.com/";
+const url = "https://damp-brook-68706.herokuapp.com/";
 
 export const signin = async ({ email, password }: SignInDto) => {
   try {
