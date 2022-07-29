@@ -2,11 +2,11 @@ import "antd/dist/antd.css";
 import { NextPage } from "next";
 import Router from "next/router";
 import { CSSProperties } from "react";
-import { Button, Layout, Row, Tooltip } from "antd";
 import { useSelector } from "react-redux";
+import { Button, Layout, Row, Tooltip } from "antd";
+import { ArrowLeftOutlined } from "@ant-design/icons";
 import colors, { colorList } from "../../../../utils/colors";
 import { ThemeColor } from "../../../../store/reducers/theme.reducer";
-import { ArrowLeftOutlined } from "@ant-design/icons";
 import ButtonColorComponent from "../../../../components/button-color";
 
 class Style {
@@ -36,13 +36,13 @@ const ChangeThemePage: NextPage = () => {
       <Row
         align="middle"
         style={{
-          margin: "5px",
-          padding: "5px",
+          margin: "0px 5px 20px 5px",
+          padding: "15px",
           color: "white",
           fontSize: "1.2EM",
           fontWeight: "bolder",
           backgroundColor: colors[color][7],
-          borderLeft: `5px solid ${colors[color][5]}`,
+          borderLeft: `6px solid ${colors[color][5]}`,
         }}
       >
         <Tooltip title="Voltar">

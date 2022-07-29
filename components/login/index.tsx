@@ -1,8 +1,15 @@
 import service from "../../service";
 import colors from "../../utils/colors";
 import { PortifolioState } from "../../store";
-import { CSSProperties, useState } from "react";
-import { CloseOutlined } from "@ant-design/icons";
+import { CSSProperties, ReactElement, useEffect, useState } from "react";
+import {
+  CloseOutlined,
+  SaveOutlined,
+  LoadingOutlined,
+  LoginOutlined,
+  LogoutOutlined,
+  UserAddOutlined,
+} from "@ant-design/icons";
 import { Dispatcher } from "../../store/dispathers";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Col, Drawer, Input, message, Row, Image } from "antd";
@@ -98,31 +105,56 @@ const LoginComponent = (props: LoginComponentProps) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [icon, setIcon] = useState<ReactElement>(<SaveOutlined />);
   const [mode, setMode] = useState<"SignIn" | "SignUp" | "SignOut">(
     currentUser ? "SignOut" : "SignIn"
   );
+
+  useEffect(() => {
+    if (loading) return setIcon(<LoadingOutlined />);
+
+    switch (mode) {
+      case "SignIn":
+        return setIcon(<LoginOutlined />);
+      case "SignUp":
+        return setIcon(<UserAddOutlined />);
+      case "SignOut":
+        return setIcon(<LogoutOutlined />);
+    }
+  }, [mode, loading]);
+
   const style = new Style(color, mode);
 
   const signin = async () => {
+    setLoading(true);
     const user = await service.auth.signin({ email, password });
     dispatcher.user.currentUserChange(user);
     if (user) {
       setVisible(false);
       message.success("Bem vindo " + user.name);
     }
+    setLoading(false);
   };
+
   const signup = async () => {
+    setLoading(true);
     const user = await service.auth.signup({ email, password, name });
     dispatcher.user.currentUserChange(user);
     if (user) {
       setVisible(false);
       message.success("Bem vindo " + user.name);
     }
+    setLoading(false);
   };
 
   const signout = async () => {
+    setLoading(true);
     await service.auth.signout();
     dispatcher.user.currentUserExit();
+    setVisible(false);
+    message.warning("Saiu");
+    setLoading(false);
   };
 
   return (
@@ -197,6 +229,7 @@ const LoginComponent = (props: LoginComponentProps) => {
         style={style.button}
         onClick={currentUser ? signout : mode == "SignIn" ? signin : signup}
       >
+        {icon}
         {currentUser ? "SignOut" : mode == "SignIn" ? "Entrar" : "Cadastrar"}
       </Button>
     </Drawer>

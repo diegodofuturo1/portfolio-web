@@ -1,10 +1,9 @@
 import LoginComponent from "../login";
 import colors from "../../utils/colors";
 import { Affix, Avatar, Row } from "antd";
+import { useSelector } from "react-redux";
 import { PortifolioState } from "../../store";
 import { CSSProperties, useState } from "react";
-import { Dispatcher } from "../../store/dispathers";
-import { useDispatch, useSelector } from "react-redux";
 import { ThemeColor } from "../../store/reducers/theme.reducer";
 import { UserOutlined, TrophyOutlined } from "@ant-design/icons";
 
