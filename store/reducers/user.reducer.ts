@@ -24,8 +24,6 @@ const reducer = (
   state: UserState = initialState,
   action: UserAction
 ): UserState => {
-  console.log("[PAYLOAD]", action.payload);
-
   switch (action.type) {
     case CURRENT_USER_CHANGE:
       return { ...state, currentUser: action.payload.currentUser };
