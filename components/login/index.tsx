@@ -129,10 +129,10 @@ const LoginComponent = (props: LoginComponentProps) => {
   const signin = async () => {
     setLoading(true);
     const user = await service.auth.signin({ email, password });
-    dispatcher.user.currentUserChange(user);
-    if (user) {
-      setVisible(false);
+    if (user?.name) {
+      dispatcher.user.currentUserChange(user);
       message.success("Bem vindo " + user.name);
+      setVisible(false);
     }
     setLoading(false);
   };
@@ -140,10 +140,10 @@ const LoginComponent = (props: LoginComponentProps) => {
   const signup = async () => {
     setLoading(true);
     const user = await service.auth.signup({ email, password, name });
-    dispatcher.user.currentUserChange(user);
-    if (user) {
-      setVisible(false);
+    if (user?.name) {
+      dispatcher.user.currentUserChange(user);
       message.success("Bem vindo " + user.name);
+      setVisible(false);
     }
     setLoading(false);
   };
@@ -207,6 +207,7 @@ const LoginComponent = (props: LoginComponentProps) => {
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           size="small"
+          type="email"
           style={style.input}
         />
 

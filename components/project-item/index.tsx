@@ -26,14 +26,15 @@ class Style {
 }
 
 interface ProjectItemComponentProps {
-  route: string;
   title: string;
+  badge: string | React.ReactElement;
+  route?: string;
   discription: string;
-  badge: string;
+  onClick?: () => void;
 }
 
 const ProjectItemComponent = (props: ProjectItemComponentProps) => {
-  const { route, title, discription, badge } = props;
+  const { route, title, discription, badge, onClick } = props;
 
   const { color }: { color: ThemeColor } = useSelector(
     (state: any) => state.theme
@@ -52,7 +53,9 @@ const ProjectItemComponent = (props: ProjectItemComponentProps) => {
       <Badge.Ribbon text={badge} color={colors[color][5]}>
         <Card
           hoverable
-          onClick={() => setRedirect(route)}
+          onClick={() =>
+            route ? setRedirect(route) : onClick ? onClick() : undefined
+          }
           style={{
             backgroundColor: colors[color][7],
             border: `1px solid ${colors[color][6]}`,

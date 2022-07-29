@@ -1,11 +1,12 @@
 import LoginComponent from "../login";
 import colors from "../../utils/colors";
 import { Affix, Avatar, Row } from "antd";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { PortifolioState } from "../../store";
 import { CSSProperties, useState } from "react";
 import { ThemeColor } from "../../store/reducers/theme.reducer";
 import { UserOutlined, TrophyOutlined } from "@ant-design/icons";
+import { Dispatcher } from "../../store/dispathers";
 
 class Style {
   constructor(private readonly color: ThemeColor = "gray") {}
@@ -31,11 +32,11 @@ class Style {
 const HeaderComponent = () => {
   const {
     theme: { color },
-    user: { currentUser },
+    user: { currentUser, drawer },
   } = useSelector((state: PortifolioState) => state);
 
   const style = new Style(color);
-  const [drawer, setDrawer] = useState(false);
+  const disptcher = new Dispatcher(useDispatch());
 
   return (
     <Affix>
@@ -45,12 +46,18 @@ const HeaderComponent = () => {
           Meu Portfólio
         </Row>
         <Row align="middle">
-          <a style={style.loginLink} onClick={() => setDrawer(!drawer)}>
+          <a
+            style={style.loginLink}
+            onClick={() => disptcher.user.openDrawer()}
+          >
             {currentUser?.id ? currentUser.name : "SignIn"}
           </a>
           <Avatar src={currentUser?.avatar} size={32} icon={<UserOutlined />} />
         </Row>
-        <LoginComponent visible={drawer} setVisible={setDrawer} />
+        <LoginComponent
+          visible={drawer}
+          setVisible={disptcher.user.closeDrawer}
+        />
       </Row>
     </Affix>
   );

@@ -26,8 +26,8 @@ const ButtonColorComponent = (props: ButtonColorComponentProps) => {
       sm={{ span: 12 }}
       md={{ span: 6 }}
       lg={{ span: 4 }}
-      xl={{ span: 3 }}
-      xxl={{ span: 3 }}
+      xl={{ span: 4 }}
+      xxl={{ span: 4 }}
       style={{ padding: "5px" }}
       key={props.key}
     >
@@ -46,7 +46,7 @@ const ButtonColorComponent = (props: ButtonColorComponentProps) => {
           height: "30px",
           fontSize: "1.1EM",
           fontWeight: "bolder",
-          width: hover ? "97%" : "100%",
+          width: hover ? "98%" : "100%",
           border:
             color == props.color
               ? `1px solid ${colors[props.color][3]}`

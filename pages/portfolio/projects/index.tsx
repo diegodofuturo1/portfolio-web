@@ -2,10 +2,16 @@ import "antd/dist/antd.css";
 import { NextPage } from "next";
 import { Layout, Row } from "antd";
 import { CSSProperties } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import colors from "../../../utils/colors";
 import { ThemeColor } from "../../../store/reducers/theme.reducer";
 import ProjectItemComponent from "../../../components/project-item";
+import { Dispatcher } from "../../../store/dispathers";
+import {
+  BgColorsOutlined,
+  LoginOutlined,
+  ClockCircleOutlined,
+} from "@ant-design/icons";
 
 class Style {
   constructor(private readonly color: ThemeColor = "gray") {}
@@ -23,6 +29,7 @@ const ExperiencePage: NextPage = () => {
   );
 
   const style = new Style(color);
+  const disptcher = new Dispatcher(useDispatch());
 
   return (
     <Layout style={style.layout}>
@@ -31,19 +38,28 @@ const ExperiencePage: NextPage = () => {
           route="projects/change-theme"
           title="Change Theme"
           discription="Altere o padrão de cores do site!"
-          badge="Novo"
+          badge={<BgColorsOutlined />}
         />
         <ProjectItemComponent
-          route=""
           title="SignIn/SignOut"
           discription="Autenticação de usuários do site!"
-          badge="Em breve"
+          badge={
+            <>
+              <LoginOutlined />
+              {"  Novo"}
+            </>
+          }
+          onClick={disptcher.user.openDrawer}
         />
         <ProjectItemComponent
-          route=""
           title="API"
           discription="Conectar site com uma api e banco de dados"
-          badge="Em breve"
+          badge={
+            <>
+              <ClockCircleOutlined />
+              {"  Em breve"}
+            </>
+          }
         />
       </Row>
     </Layout>

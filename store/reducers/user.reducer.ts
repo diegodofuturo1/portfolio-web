@@ -1,19 +1,44 @@
 import { UserDto } from "../../dtos/user.dto";
-import { CURRENT_USER_CHANGE, CURRENT_USER_EXIT } from "../actions/user.action";
+
+import {
+  CLOSE_DRAWER,
+  CURRENT_USER_CHANGE,
+  CURRENT_USER_EXIT,
+  OPEN_DRAWER,
+  UserActionType,
+} from "../actions/user.action";
 
 export interface UserState {
   currentUser?: UserDto;
+  drawer: boolean;
 }
 
-const initialState: UserState = {};
+export interface UserAction {
+  payload: Partial<UserState>;
+  type: UserActionType;
+}
 
-const reducer = (state: UserState = initialState, action: any): UserState => {
+const initialState: UserState = { drawer: false };
+
+const reducer = (
+  state: UserState = initialState,
+  action: UserAction
+): UserState => {
+  console.log("[PAYLOAD]", action.payload);
+
   switch (action.type) {
     case CURRENT_USER_CHANGE:
-      return { ...state, currentUser: action.payload };
+      return { ...state, currentUser: action.payload.currentUser };
 
     case CURRENT_USER_EXIT:
       return { ...state, currentUser: undefined };
+
+    case OPEN_DRAWER:
+      return { ...state, drawer: true };
+
+    case CLOSE_DRAWER:
+      return { ...state, drawer: false };
+
     default:
       return state;
   }

@@ -19,9 +19,13 @@ class Style {
   };
 
   button: CSSProperties = {
-    color: colors[this.color][0],
+    color: colors[this.color][1],
     backgroundColor: colors[this.color][8],
+    border: `0px solid ${colors[this.color][1]}`,
     margin: "0px 5px",
+    height: "40px",
+    width: "40px",
+    fontSize: "1.2EM",
   };
 }
 
