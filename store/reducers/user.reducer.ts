@@ -1,5 +1,5 @@
-import { UserDto } from "../../dtos/user.dto";
-
+import { setCookie, deleteCookie } from "cookies-next";
+import { UserDto } from "../../dtos/auth/user.dto";
 import {
   CLOSE_DRAWER,
   CURRENT_USER_CHANGE,
@@ -26,9 +26,11 @@ const reducer = (
 ): UserState => {
   switch (action.type) {
     case CURRENT_USER_CHANGE:
+      setCookie(`token`, action.payload.currentUser?.token);
       return { ...state, currentUser: action.payload.currentUser };
 
     case CURRENT_USER_EXIT:
+      deleteCookie(`token`);
       return { ...state, currentUser: undefined };
 
     case OPEN_DRAWER:

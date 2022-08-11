@@ -1,10 +1,10 @@
 import Router from "next/router";
 import Meta from "antd/lib/card/Meta";
-import colors from "../../utils/colors";
 import { useSelector } from "react-redux";
 import { Badge, Card, Col, Row } from "antd";
 import { CSSProperties, useEffect, useState } from "react";
 import { ThemeColor } from "../../store/reducers/theme.reducer";
+import colors from "../../utils/colors";
 
 const colSpan = {
   xs: { span: 24 },

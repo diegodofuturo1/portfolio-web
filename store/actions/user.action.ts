@@ -1,4 +1,4 @@
-import { UserDto } from "../../dtos/user.dto";
+import { UserDto } from "../../dtos/auth/user.dto";
 import { UserAction } from "../reducers/user.reducer";
 
 export const CURRENT_USER_CHANGE = "CURRENT_USER_CHANGE";

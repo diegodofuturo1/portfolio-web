@@ -1,9 +1,6 @@
-import {
-  MENU_HOVER_CHANGE,
-  MENU_SELECTED_CHANGE,
-} from "../actions/menu.action";
+import { MENU_HOVER_CHANGE, MENU_SELECTED_CHANGE } from '../actions/menu.action';
 
-export type MenuType = "about" | "education" | "experience" | "projects" | "";
+export type MenuType = 'about' | 'education' | 'experience' | 'projects' | '';
 
 export interface MenuState {
   hover: MenuType;
@@ -11,8 +8,8 @@ export interface MenuState {
 }
 
 const initialState: MenuState = {
-  hover: "",
-  selected: "",
+  hover: '',
+  selected: '',
 };
 
 const reducer = (state: MenuState = initialState, action: any) => {
@@ -21,7 +18,7 @@ const reducer = (state: MenuState = initialState, action: any) => {
       return { ...state, hover: action.payload };
 
     case MENU_SELECTED_CHANGE:
-      localStorage.setItem("selected", action.payload);
+      localStorage.setItem('selected', action.payload);
       return { ...state, selected: action.payload };
     default:
       return state;

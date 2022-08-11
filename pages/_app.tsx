@@ -5,9 +5,8 @@ import { storeWrapper } from "../store";
 import type { AppProps } from "next/app";
 import MenuItemComponent from "../components/menuitem";
 import { Content, Footer } from "antd/lib/layout/layout";
-import { Affix, Avatar, Button, Col, Layout, message, Row } from "antd";
+import { Affix, Col, Layout, message, Row } from "antd";
 import {
-  UserOutlined,
   InfoCircleOutlined,
   BookOutlined,
   ExperimentOutlined,
@@ -28,6 +27,7 @@ class Style {
   col: CSSProperties = {
     margin: "20px auto",
     height: "100%",
+    boxShadow: "5px 5px 10px 0px black",
   };
 
   menu: CSSProperties = {

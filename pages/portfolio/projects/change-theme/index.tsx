@@ -1,13 +1,12 @@
 import "antd/dist/antd.css";
 import { NextPage } from "next";
-import Router from "next/router";
 import { CSSProperties } from "react";
 import { useSelector } from "react-redux";
-import { Button, Layout, Row, Tooltip } from "antd";
-import { ArrowLeftOutlined } from "@ant-design/icons";
+import { Layout, Row } from "antd";
 import colors, { colorList } from "../../../../utils/colors";
 import { ThemeColor } from "../../../../store/reducers/theme.reducer";
 import ButtonColorComponent from "../../../../components/button-color";
+import ProjectHeaderComponent from "../../../../components/project-header";
 
 class Style {
   constructor(private readonly color: ThemeColor = "gray") {}
@@ -37,30 +36,7 @@ const ChangeThemePage: NextPage = () => {
 
   return (
     <Layout style={style.layout}>
-      <Row
-        align="middle"
-        style={{
-          margin: "0px 5px 20px 5px",
-          padding: "15px",
-          color: "white",
-          fontSize: "1.2EM",
-          fontWeight: "bolder",
-          backgroundColor: colors[color][7],
-          borderLeft: `6px solid ${colors[color][5]}`,
-        }}
-      >
-        <Tooltip title="Voltar">
-          <Button
-            onClick={() => Router.push("/portfolio/projects")}
-            shape="circle"
-            size="small"
-            style={style.button}
-          >
-            <ArrowLeftOutlined />
-          </Button>
-        </Tooltip>
-        <Row style={{ margin: "0px 10px" }}>Escolha uma das cores</Row>
-      </Row>
+      <ProjectHeaderComponent title="Seleção de Tema" />
       <Row>
         {colorList.map((_color) => (
           <ButtonColorComponent color={_color} key={`button-color-${_color}`} />

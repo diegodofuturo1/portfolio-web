@@ -1,9 +1,8 @@
 import axios from "axios";
 import { message } from "antd";
-import { SignInDto } from "../../dtos/signin.dto";
-import { SignUpDto } from "../../dtos/signup.dto";
-
-const url = "https://damp-brook-68706.herokuapp.com/";
+import { SignInDto } from "../../dtos/auth/signin.dto";
+import { SignUpDto } from "../../dtos/auth/signup.dto";
+import { url } from "..";
 
 export const signin = async ({ email, password }: SignInDto) => {
   try {

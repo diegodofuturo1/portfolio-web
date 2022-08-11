@@ -1,6 +1,6 @@
 import service from "../../service";
 import colors from "../../utils/colors";
-import { PortifolioState } from "../../store";
+import { PortifolioState } from "../../store/reducers";
 import { CSSProperties, ReactElement, useEffect, useState } from "react";
 import {
   CloseOutlined,
