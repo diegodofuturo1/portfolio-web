@@ -5,7 +5,7 @@ import colors from '../../../utils/colors';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { Dispatcher } from '../../../store/dispathers';
-import ProjectParamComponent from '../request-api-param';
+import RequestApiParamComponent from '../request-api-param';
 import { ParamDto } from '../../../dtos/request/param.dto';
 import { EndpointDto } from '../../../dtos/request/endpoint.dto';
 import { ThemeColor } from '../../../store/reducers/theme.reducer';
@@ -75,12 +75,12 @@ const RequestApiComponent = (props: RequestApiComponentProps) => {
       onMouseLeave={() => setHover(false)}
     >
       <Row style={style.row}>
-        <RequestApiMethodComponent method={endpoint.method} setOpen={setOpen} />
-        <RequestApiTitleComponent title={endpoint.path} setOpen={setOpen} />
+        <RequestApiMethodComponent method={endpoint.method} open={open} setOpen={setOpen} />
+        <RequestApiTitleComponent title={endpoint.path} open={open} setOpen={setOpen} />
         <RequestApiIconComponent open={open} setOpen={setOpen} />
 
         <Col span={24} hidden={!open} style={{ backgroundColor: colors[color][6] }}>
-          <ProjectParamComponent params={params} setParams={setParams} />
+          <RequestApiParamComponent params={params} setParams={setParams} />
           <RequestApiButtonComponent onclickHandler={executeHandler} loading={loading} />
           <RequestApiResponseComponent response={response} loading={loading} />
         </Col>

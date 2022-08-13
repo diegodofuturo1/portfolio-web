@@ -1,9 +1,9 @@
-import { Input, Row } from "antd";
-import { useSelector } from "react-redux";
-import colors from "../../../utils/colors";
-import { PortifolioState } from "../../../store/reducers";
-import { ParamDto } from "../../../dtos/request/param.dto";
-import { Dispatch, SetStateAction } from "react";
+import { Input, Row } from 'antd';
+import { useSelector } from 'react-redux';
+import colors from '../../../utils/colors';
+import { PortifolioState } from '../../../store/reducers';
+import { ParamDto } from '../../../dtos/request/param.dto';
+import { Dispatch, SetStateAction } from 'react';
 
 interface RequestApiInputProps {
   param: ParamDto;
@@ -28,17 +28,17 @@ const RequestApiInput = (props: RequestApiInputProps) => {
   };
 
   return (
-    <Row key={id} style={{ padding: "5px" }}>
+    <Row key={id} style={{ padding: '5px' }}>
       <Input
         value={value}
         onChange={(event) => saveParamHandler(event.target.value)}
-        placeholder={"@" + type + ": " + key}
+        placeholder={'@' + type + ': ' + key}
         size="small"
         style={{
           backgroundColor: colors[color][5],
-          border: "0px",
-          height: "100%",
-          width: "100%",
+          border: '0px',
+          height: '100%',
+          width: '100%',
           color: colors[color][2],
         }}
       />

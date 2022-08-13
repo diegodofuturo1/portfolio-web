@@ -6,10 +6,11 @@ import { ThemeColor } from '../../../store/reducers/theme.reducer';
 interface RequestApiButtonComponentProps {
   setOpen: (value: boolean) => void;
   method: string;
+  open: boolean;
 }
 
 const RequestApiMethodComponent = (props: RequestApiButtonComponentProps) => {
-  const { setOpen, method } = props;
+  const { setOpen, method, open } = props;
   const { color }: { color: ThemeColor } = useSelector((state: any) => state.theme);
 
   let methodColor: ThemeColor = 'gray';
@@ -33,10 +34,12 @@ const RequestApiMethodComponent = (props: RequestApiButtonComponentProps) => {
     <Col span={6} onClick={() => setOpen(!open)}>
       <Row
         justify="center"
+        align="middle"
         style={{
           backgroundColor: colors[methodColor][6],
           color: colors[color][1],
           fontWeight: 'bolder',
+          height: '30px',
         }}
       >
         {method}
