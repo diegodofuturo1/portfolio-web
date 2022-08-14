@@ -1,25 +1,15 @@
-import service from "../../service";
-import colors from "../../utils/colors";
-import { PortifolioState } from "../../store/reducers";
-import { CSSProperties, ReactElement, useEffect, useState } from "react";
-import {
-  CloseOutlined,
-  SaveOutlined,
-  LoadingOutlined,
-  LoginOutlined,
-  LogoutOutlined,
-  UserAddOutlined,
-} from "@ant-design/icons";
-import { Dispatcher } from "../../store/dispathers";
-import { useSelector, useDispatch } from "react-redux";
-import { Button, Col, Drawer, Input, message, Row, Image } from "antd";
-import { ThemeColor } from "../../store/reducers/theme.reducer";
+import service from 'service';
+import colors from 'utils/colors';
+import { PortifolioState } from 'store/reducers';
+import { CSSProperties, ReactElement, useEffect, useState } from 'react';
+import { CloseOutlined, SaveOutlined, LoadingOutlined, LoginOutlined, LogoutOutlined, UserAddOutlined } from '@ant-design/icons';
+import { Dispatcher } from 'store/dispathers';
+import { useSelector, useDispatch } from 'react-redux';
+import { Button, Col, Drawer, Input, message, Row, Image } from 'antd';
+import { ThemeColor } from 'store/reducers/theme.reducer';
 
 class Style {
-  constructor(
-    private readonly color: ThemeColor = "gray",
-    private readonly mode: "SignIn" | "SignUp" | "SignOut"
-  ) {}
+  constructor(private readonly color: ThemeColor = 'gray', private readonly mode: 'SignIn' | 'SignUp' | 'SignOut') {}
 
   icon: CSSProperties = {
     color: colors[this.color][2],
@@ -27,7 +17,7 @@ class Style {
 
   title: CSSProperties = {
     color: colors[this.color][2],
-    fontWeight: "bold",
+    fontWeight: 'bold',
   };
 
   drawerBody: CSSProperties = {
@@ -43,12 +33,12 @@ class Style {
   input: CSSProperties = {
     backgroundColor: colors[this.color][5],
     border: `3x solid ${colors[this.color][4]}`,
-    marginBottom: "20px",
+    marginBottom: '20px',
   };
 
   label: CSSProperties = {
-    fontSize: "1.1EM",
-    fontWeight: "bold",
+    fontSize: '1.1EM',
+    fontWeight: 'bold',
     color: colors[this.color][2],
   };
 
@@ -56,34 +46,32 @@ class Style {
     color: colors[this.color][3],
     backgroundColor: colors[this.color][7],
     border: `3x solid ${colors[this.color][4]}`,
-    width: "100%",
-    margin: "20px 0px",
+    width: '100%',
+    margin: '20px 0px',
   };
 
   menu: CSSProperties = {
     backgroundColor: colors[this.color][8],
     color: colors[this.color][3],
-    padding: "10px 0px",
-    cursor: "pointer",
+    padding: '10px 0px',
+    cursor: 'pointer',
     border: `1px solid ${colors[this.color][7]}`,
   };
 
   menuSignIn: CSSProperties = {
     ...this.menu,
-    borderBottom:
-      this.mode == "SignIn" ? `5px solid ${colors[this.color][5]}` : undefined,
+    borderBottom: this.mode == 'SignIn' ? `5px solid ${colors[this.color][5]}` : undefined,
   };
 
   menuSignUp: CSSProperties = {
     ...this.menu,
-    borderBottom:
-      this.mode == "SignUp" ? `5px solid ${colors[this.color][5]}` : undefined,
+    borderBottom: this.mode == 'SignUp' ? `5px solid ${colors[this.color][5]}` : undefined,
   };
 
   userInfo: CSSProperties = {
     color: colors[this.color][4],
-    fontSize: "1.1EM",
-    fontWeight: "bold",
+    fontSize: '1.1EM',
+    fontWeight: 'bold',
   };
 }
 
@@ -102,24 +90,22 @@ const LoginComponent = (props: LoginComponentProps) => {
 
   const dispatcher = new Dispatcher(useDispatch());
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [icon, setIcon] = useState<ReactElement>(<SaveOutlined />);
-  const [mode, setMode] = useState<"SignIn" | "SignUp" | "SignOut">(
-    currentUser ? "SignOut" : "SignIn"
-  );
+  const [mode, setMode] = useState<'SignIn' | 'SignUp' | 'SignOut'>(currentUser ? 'SignOut' : 'SignIn');
 
   useEffect(() => {
     if (loading) return setIcon(<LoadingOutlined />);
 
     switch (mode) {
-      case "SignIn":
+      case 'SignIn':
         return setIcon(<LoginOutlined />);
-      case "SignUp":
+      case 'SignUp':
         return setIcon(<UserAddOutlined />);
-      case "SignOut":
+      case 'SignOut':
         return setIcon(<LogoutOutlined />);
     }
   }, [mode, loading]);
@@ -131,7 +117,7 @@ const LoginComponent = (props: LoginComponentProps) => {
     const user = await service.auth.signin({ email, password });
     if (user?.name) {
       dispatcher.user.currentUserChange(user);
-      message.success("Bem vindo " + user.name);
+      message.success('Bem vindo ' + user.name);
       setVisible(false);
     }
     setLoading(false);
@@ -142,7 +128,7 @@ const LoginComponent = (props: LoginComponentProps) => {
     const user = await service.auth.signup({ email, password, name });
     if (user?.name) {
       dispatcher.user.currentUserChange(user);
-      message.success("Bem vindo " + user.name);
+      message.success('Bem vindo ' + user.name);
       setVisible(false);
     }
     setLoading(false);
@@ -153,7 +139,7 @@ const LoginComponent = (props: LoginComponentProps) => {
     await service.auth.signout();
     dispatcher.user.currentUserExit();
     setVisible(false);
-    message.warning("Saiu");
+    message.warning('Saiu');
     setLoading(false);
   };
 
@@ -168,57 +154,27 @@ const LoginComponent = (props: LoginComponentProps) => {
     >
       <Row hidden={!!currentUser}>
         <Col span={12}>
-          <Row
-            justify="center"
-            onClick={() => setMode("SignIn")}
-            style={style.menuSignIn}
-          >
+          <Row justify="center" onClick={() => setMode('SignIn')} style={style.menuSignIn}>
             SignIn
           </Row>
         </Col>
         <Col span={12}>
-          <Row
-            justify="center"
-            onClick={() => setMode("SignUp")}
-            style={style.menuSignUp}
-          >
+          <Row justify="center" onClick={() => setMode('SignUp')} style={style.menuSignUp}>
             SignUp
           </Row>
         </Col>
       </Row>
-      <Col
-        hidden={!!currentUser}
-        style={{ padding: "10px 20px", backgroundColor: colors[color][6] }}
-      >
-        <Row hidden={mode == "SignIn"} style={style.label}>
+      <Col hidden={!!currentUser} style={{ padding: '10px 20px', backgroundColor: colors[color][6] }}>
+        <Row hidden={mode == 'SignIn'} style={style.label}>
           Name
         </Row>
-        <Input
-          value={name}
-          hidden={mode == "SignIn"}
-          onChange={(event) => setName(event.target.value)}
-          type="name"
-          size="small"
-          style={style.input}
-        />
+        <Input value={name} hidden={mode == 'SignIn'} onChange={(event) => setName(event.target.value)} type="name" size="small" style={style.input} />
 
         <Row style={style.label}>Email</Row>
-        <Input
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          size="small"
-          type="email"
-          style={style.input}
-        />
+        <Input value={email} onChange={(event) => setEmail(event.target.value)} size="small" type="email" style={style.input} />
 
         <Row style={style.label}>Password</Row>
-        <Input
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-          type="password"
-          size="small"
-          style={style.input}
-        />
+        <Input value={password} onChange={(event) => setPassword(event.target.value)} type="password" size="small" style={style.input} />
       </Col>
       <Col hidden={!currentUser}>
         <Row style={style.userInfo}>Nome: {currentUser?.name}</Row>
@@ -226,12 +182,9 @@ const LoginComponent = (props: LoginComponentProps) => {
         <Row style={style.userInfo}>Id: {currentUser?.id}</Row>
         <Image src={currentUser?.avatar} />
       </Col>
-      <Button
-        style={style.button}
-        onClick={currentUser ? signout : mode == "SignIn" ? signin : signup}
-      >
+      <Button style={style.button} onClick={currentUser ? signout : mode == 'SignIn' ? signin : signup}>
         {icon}
-        {currentUser ? "SignOut" : mode == "SignIn" ? "Entrar" : "Cadastrar"}
+        {currentUser ? 'SignOut' : mode == 'SignIn' ? 'Entrar' : 'Cadastrar'}
       </Button>
     </Drawer>
   );

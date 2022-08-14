@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { getCookie } from 'cookies-next';
 import { url } from '..';
-import { EndpointDto } from '../../dtos/request/endpoint.dto';
-import { ParamDto } from '../../dtos/request/param.dto';
+import { EndpointDto } from 'dtos/request/endpoint.dto';
+import { ParamDto } from 'dtos/request/param.dto';
 
 export const getEndpoints = async () => {
   try {

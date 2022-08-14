@@ -1,12 +1,6 @@
-import { setCookie, deleteCookie } from "cookies-next";
-import { UserDto } from "../../dtos/auth/user.dto";
-import {
-  CLOSE_DRAWER,
-  CURRENT_USER_CHANGE,
-  CURRENT_USER_EXIT,
-  OPEN_DRAWER,
-  UserActionType,
-} from "../actions/user.action";
+import { setCookie, deleteCookie } from 'cookies-next';
+import { UserDto } from 'dtos/auth/user.dto';
+import { CLOSE_DRAWER, CURRENT_USER_CHANGE, CURRENT_USER_EXIT, OPEN_DRAWER, UserActionType } from 'store/actions/user.action';
 
 export interface UserState {
   currentUser?: UserDto;
@@ -20,10 +14,7 @@ export interface UserAction {
 
 const initialState: UserState = { drawer: false };
 
-const reducer = (
-  state: UserState = initialState,
-  action: UserAction
-): UserState => {
+const reducer = (state: UserState = initialState, action: UserAction): UserState => {
   switch (action.type) {
     case CURRENT_USER_CHANGE:
       setCookie(`token`, action.payload.currentUser?.token);

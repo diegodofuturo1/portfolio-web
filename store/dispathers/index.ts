@@ -1,29 +1,19 @@
-import { AnyAction, Dispatch } from "redux";
-import { MenuType } from "../reducers/menu.reducer";
-import { ThemeColor } from "../reducers/theme.reducer";
-import { themeColorChange } from "../actions/theme.action";
-import { menuHoverChange, menuSelectedChange } from "../actions/menu.action";
-import {
-  closeDrawer,
-  currentUserChange,
-  currentUserExit,
-  openDrawer,
-} from "../actions/user.action";
-import { UserDto } from "../../dtos/auth/user.dto";
-import {
-  saveEndpoints,
-  saveParamValue,
-  SaveParamValue,
-} from "../actions/request-api.action";
-import { EndpointDto } from "../../dtos/request/endpoint.dto";
+import { AnyAction, Dispatch } from 'redux';
+import { UserDto } from 'dtos/auth/user.dto';
+import { MenuType } from 'store/reducers/menu.reducer';
+import { EndpointDto } from 'dtos/request/endpoint.dto';
+import { ThemeColor } from 'store/reducers/theme.reducer';
+import { themeColorChange } from 'store/actions/theme.action';
+import { menuHoverChange, menuSelectedChange } from 'store/actions/menu.action';
+import { saveEndpoints, SaveParamValue, saveParamValue } from 'store/actions/request-api.action';
+import { closeDrawer, currentUserChange, currentUserExit, openDrawer } from 'store/actions/user.action';
 
 export class Dispatcher {
   constructor(private readonly dispatch: Dispatch<AnyAction>) {}
 
   public menu = {
     hoverChange: (hover: MenuType) => this.dispatch(menuHoverChange(hover)),
-    selectedChange: (selected: MenuType) =>
-      this.dispatch(menuSelectedChange(selected)),
+    selectedChange: (selected: MenuType) => this.dispatch(menuSelectedChange(selected)),
   };
 
   public theme = {
@@ -31,8 +21,7 @@ export class Dispatcher {
   };
 
   public user = {
-    currentUserChange: (user: UserDto) =>
-      this.dispatch(currentUserChange(user)),
+    currentUserChange: (user: UserDto) => this.dispatch(currentUserChange(user)),
 
     currentUserExit: () => this.dispatch(currentUserExit()),
 
@@ -42,10 +31,8 @@ export class Dispatcher {
   };
 
   public request = {
-    saveEndpoints: (endpoints: EndpointDto[]) =>
-      this.dispatch(saveEndpoints(endpoints)),
+    saveEndpoints: (endpoints: EndpointDto[]) => this.dispatch(saveEndpoints(endpoints)),
 
-    saveParamValue: (payload: SaveParamValue) =>
-      this.dispatch(saveParamValue(payload)),
+    saveParamValue: (payload: SaveParamValue) => this.dispatch(saveParamValue(payload)),
   };
 }

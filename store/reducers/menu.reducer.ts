@@ -1,4 +1,4 @@
-import { MENU_HOVER_CHANGE, MENU_SELECTED_CHANGE } from '../actions/menu.action';
+import { MENU_HOVER_CHANGE, MENU_SELECTED_CHANGE } from 'store/actions/menu.action';
 
 export type MenuType = 'about' | 'education' | 'experience' | 'projects' | '';
 

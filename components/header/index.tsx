@@ -1,31 +1,31 @@
-import LoginComponent from "../login";
-import colors from "../../utils/colors";
-import { Affix, Avatar, Row } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { PortifolioState } from "../../store/reducers";
-import { CSSProperties, useState } from "react";
-import { ThemeColor } from "../../store/reducers/theme.reducer";
-import { UserOutlined, TrophyOutlined } from "@ant-design/icons";
-import { Dispatcher } from "../../store/dispathers";
+import colors from 'utils/colors';
+import { CSSProperties } from 'react';
+import { Affix, Avatar, Row } from 'antd';
+import { Dispatcher } from 'store/dispathers';
+import LoginComponent from 'components/login';
+import { PortifolioState } from 'store/reducers';
+import { useDispatch, useSelector } from 'react-redux';
+import { ThemeColor } from 'store/reducers/theme.reducer';
+import { UserOutlined, TrophyOutlined } from '@ant-design/icons';
 
 class Style {
-  constructor(private readonly color: ThemeColor = "gray") {}
+  constructor(private readonly color: ThemeColor = 'gray') {}
 
   header: CSSProperties = {
-    padding: "10px 20px",
+    padding: '10px 20px',
     color: colors.white,
     backgroundColor: colors[this.color][9],
   };
 
   trophy: CSSProperties = {
     color: colors[this.color][5],
-    fontSize: "1.8EM",
-    margin: "0px 10px",
+    fontSize: '1.8EM',
+    margin: '0px 10px',
   };
 
   loginLink: CSSProperties = {
     color: colors[this.color][4],
-    margin: "0px 20px",
+    margin: '0px 20px',
   };
 }
 
@@ -46,18 +46,12 @@ const HeaderComponent = () => {
           Meu Portfólio
         </Row>
         <Row align="middle">
-          <a
-            style={style.loginLink}
-            onClick={() => disptcher.user.openDrawer()}
-          >
-            {currentUser?.id ? currentUser.name : "SignIn"}
+          <a style={style.loginLink} onClick={() => disptcher.user.openDrawer()}>
+            {currentUser?.id ? currentUser.name : 'SignIn'}
           </a>
           <Avatar src={currentUser?.avatar} size={32} icon={<UserOutlined />} />
         </Row>
-        <LoginComponent
-          visible={drawer}
-          setVisible={disptcher.user.closeDrawer}
-        />
+        <LoginComponent visible={drawer} setVisible={disptcher.user.closeDrawer} />
       </Row>
     </Affix>
   );

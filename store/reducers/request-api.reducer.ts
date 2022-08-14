@@ -1,11 +1,6 @@
-import { EndpointDto } from "../../dtos/request/endpoint.dto";
-import { ParamDto } from "../../dtos/request/param.dto";
-import {
-  RequestApiActionType,
-  SaveParamValue,
-  SAVE_ENDPOINTS,
-  SAVE_PARAM_VALUE,
-} from "../actions/request-api.action";
+import { EndpointDto } from 'dtos/request/endpoint.dto';
+import { ParamDto } from 'dtos/request/param.dto';
+import { RequestApiActionType, SaveParamValue, SAVE_ENDPOINTS, SAVE_PARAM_VALUE } from 'store/actions/request-api.action';
 
 export interface RequestApiState {
   endpoints: EndpointDto[];
@@ -20,10 +15,7 @@ const initialState: RequestApiState = {
   endpoints: [],
 };
 
-const requestReducer = (
-  state: RequestApiState = initialState,
-  action: RequestApiAction
-): RequestApiState => {
+const requestReducer = (state: RequestApiState = initialState, action: RequestApiAction): RequestApiState => {
   switch (action.type) {
     case SAVE_ENDPOINTS:
       return { ...state, endpoints: action.payload.endpoints || [] };

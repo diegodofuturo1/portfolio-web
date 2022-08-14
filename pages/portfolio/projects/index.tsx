@@ -3,11 +3,11 @@ import { NextPage } from 'next';
 import { Layout, Row } from 'antd';
 import { CSSProperties } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import colors from '../../../utils/colors';
-import { ThemeColor } from '../../../store/reducers/theme.reducer';
-import { Dispatcher } from '../../../store/dispathers';
+import colors from 'utils/colors';
+import { ThemeColor } from 'store/reducers/theme.reducer';
+import { Dispatcher } from 'store/dispathers';
 import { BgColorsOutlined, LoginOutlined, ClockCircleOutlined } from '@ant-design/icons';
-import RequestApiItemComponent from '../../../components/project-item';
+import ProjectItemComponent from 'components/project/project-item';
 
 class Style {
   constructor(private readonly color: ThemeColor = 'gray') {}
@@ -28,7 +28,7 @@ const ProjectPage: NextPage = () => {
   return (
     <Layout style={style.layout}>
       <Row>
-        <RequestApiItemComponent
+        <ProjectItemComponent
           title="Testes"
           discription="Testes automatizados"
           badge={
@@ -38,7 +38,7 @@ const ProjectPage: NextPage = () => {
             </>
           }
         />
-        <RequestApiItemComponent
+        <ProjectItemComponent
           route="projects/request-api"
           title="API"
           discription="Interface de testes de API`s do site"
@@ -49,18 +49,8 @@ const ProjectPage: NextPage = () => {
             </>
           }
         />
-        <RequestApiItemComponent
-          title="SignIn/SignOut"
-          discription="Autenticação de usuários do site!"
-          badge={<LoginOutlined />}
-          onClick={disptcher.user.openDrawer}
-        />
-        <RequestApiItemComponent
-          route="projects/change-theme"
-          title="Change Theme"
-          discription="Altere o padrão de cores do site!"
-          badge={<BgColorsOutlined />}
-        />
+        <ProjectItemComponent title="SignIn/SignOut" discription="Autenticação de usuários do site!" badge={<LoginOutlined />} onClick={disptcher.user.openDrawer} />
+        <ProjectItemComponent route="projects/change-theme" title="Change Theme" discription="Altere o padrão de cores do site!" badge={<BgColorsOutlined />} />
       </Row>
     </Layout>
   );
