@@ -54,7 +54,7 @@ const RequestApiResponseComponent = (props: RequestApiResponseComponentProps) =>
                   padding: `0px 10px `,
                   wordBreak: `break-all`,
                   overflow: `auto`,
-                  color: colors[color][7],
+                  color: colors[color][9],
                 }}
               >
                 {object[prop]}
