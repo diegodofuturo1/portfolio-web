@@ -1,12 +1,22 @@
 import 'styles/globals.css';
 import colors from 'utils/colors';
-import { CSSProperties } from 'react';
+import { CSSProperties, useEffect } from 'react';
 import { storeWrapper } from 'store';
 import type { AppProps } from 'next/app';
 import MenuItemComponent from 'components/menuitem';
 import { Content, Footer } from 'antd/lib/layout/layout';
 import { Affix, Col, Layout, message, Row } from 'antd';
-import { InfoCircleOutlined, BookOutlined, ExperimentOutlined, LinkedinOutlined, WhatsAppOutlined, FilePdfOutlined, GoogleOutlined, GithubOutlined, ProjectOutlined } from '@ant-design/icons';
+import {
+  InfoCircleOutlined,
+  BookOutlined,
+  ExperimentOutlined,
+  LinkedinOutlined,
+  WhatsAppOutlined,
+  FilePdfOutlined,
+  GoogleOutlined,
+  GithubOutlined,
+  ProjectOutlined,
+} from '@ant-design/icons';
 import { ThemeColor } from 'store/reducers/theme.reducer';
 import { useSelector } from 'react-redux';
 import HeaderComponent from 'components/header';
@@ -122,7 +132,12 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <Col>
                   <Row align="middle" style={style.footeritem}>
                     <FilePdfOutlined style={style.icon} />
-                    <a target="_blank" rel="noreferrer" style={style.link} href={'https://diegoheleno.s3.us-east-2.amazonaws.com/public/diego-heleno.curriculo.20220726.pdf'}>
+                    <a
+                      target="_blank"
+                      rel="noreferrer"
+                      style={style.link}
+                      href={'https://diegoheleno.s3.us-east-2.amazonaws.com/public/diego-heleno.curriculo.20220726.pdf'}
+                    >
                       Currículo
                     </a>
                   </Row>

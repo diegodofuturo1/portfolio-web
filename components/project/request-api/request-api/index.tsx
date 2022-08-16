@@ -46,6 +46,9 @@ const RequestApiComponent = (props: RequestApiComponentProps) => {
 
     const execute = async () => {
       const response: any = await service.request.execute(endpoint, params);
+
+      if (!response) return setLoading(false);
+
       setResponse(response);
 
       if (endpoint.path === `auth/signin/` || endpoint.path === `auth/signup/`) dispather.user.currentUserChange(response.data);
