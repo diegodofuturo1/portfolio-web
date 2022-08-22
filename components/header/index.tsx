@@ -43,7 +43,9 @@ const HeaderComponent = () => {
     if (!currentUser) {
       const execute = async () => {
         const response = await service.auth.whoami();
-        dispatcher.user.currentUserChange(response.data);
+        if (response) {
+          dispatcher.user.currentUserChange(response.data);
+        }
       };
       execute();
     }

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import colors from 'utils/colors';
 import { ThemeColor } from 'store/reducers/theme.reducer';
 import { Dispatcher } from 'store/dispathers';
-import { BgColorsOutlined, LoginOutlined, ClockCircleOutlined } from '@ant-design/icons';
+import { BgColorsOutlined, LoginOutlined, CloudUploadOutlined, ExperimentOutlined } from '@ant-design/icons';
 import ProjectItemComponent from 'components/project/project-item';
 
 class Style {
@@ -29,12 +29,13 @@ const ProjectPage: NextPage = () => {
     <Layout style={style.layout}>
       <Row>
         <ProjectItemComponent
+          route="projects/test"
           title="Testes"
           discription="Testes automatizados"
           badge={
             <>
-              <ClockCircleOutlined />
-              {'  Em breve'}
+              <ExperimentOutlined />
+              {'  Novo'}
             </>
           }
         />
@@ -44,13 +45,23 @@ const ProjectPage: NextPage = () => {
           discription="Interface de testes de API`s do site"
           badge={
             <>
-              <ClockCircleOutlined />
+              <CloudUploadOutlined />
               {'  Novo'}
             </>
           }
         />
-        <ProjectItemComponent title="SignIn/SignOut" discription="Autenticação de usuários do site!" badge={<LoginOutlined />} onClick={disptcher.user.openDrawer} />
-        <ProjectItemComponent route="projects/change-theme" title="Change Theme" discription="Altere o padrão de cores do site!" badge={<BgColorsOutlined />} />
+        <ProjectItemComponent
+          title="SignIn/SignOut"
+          discription="Autenticação de usuários do site!"
+          badge={<LoginOutlined />}
+          onClick={disptcher.user.openDrawer}
+        />
+        <ProjectItemComponent
+          route="projects/change-theme"
+          title="Change Theme"
+          discription="Altere o padrão de cores do site!"
+          badge={<BgColorsOutlined />}
+        />
       </Row>
     </Layout>
   );

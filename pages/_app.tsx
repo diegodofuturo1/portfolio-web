@@ -31,7 +31,6 @@ class Style {
   };
 
   menu: CSSProperties = {
-    borderRadius: '5px 5px 0px 0px',
     backgroundColor: colors[this.color][9],
   };
 

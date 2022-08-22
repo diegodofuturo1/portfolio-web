@@ -53,7 +53,5 @@ export const whoami = async () => {
   try {
     const { data } = await axios.get(url + 'auth/whoami/', options);
     return data;
-  } catch (exception: any) {
-    message.error(exception.response.data.message);
-  }
+  } catch {}
 };

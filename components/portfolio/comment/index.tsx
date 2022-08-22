@@ -16,7 +16,7 @@ class Style {
     width: '80%',
     margin: '10px auto',
     backgroundColor: colors[this.color][7],
-    padding: '5px 10px',
+    padding: '0px 20px',
     color: colors[this.color][2],
     border: `1px solid ${colors[this.color][6]}`,
     borderLeft: `12px solid ${colors[this.color][5]}`,
@@ -43,15 +43,8 @@ const CommentComponent = (props: CommentComponentProps) => {
         <Comment
           key={`portfolio-comment-${index}`}
           style={style.comment}
-          author={<a style={style.textcolor}>Diego Heleno</a>}
-          avatar={
-            <Avatar
-              src="https://diegoheleno.s3.us-east-2.amazonaws.com/public/diego-heleno.jpg"
-              alt="Diego Heleno"
-            />
-          }
-          content={<Row>{comment.content}</Row>}
-          datetime={<span style={style.textcolor}> - {comment.title}</span>}
+          content={<Row style={{ textAlign: `justify` }}>{comment.content}</Row>}
+          datetime={<span style={style.textcolor}>{comment.title}</span>}
         />
       );
     });
