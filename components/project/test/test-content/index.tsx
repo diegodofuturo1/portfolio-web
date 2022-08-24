@@ -8,6 +8,7 @@ import { TestDto } from 'dtos/request/test.dto';
 import { ThemeColor } from 'store/reducers/theme.reducer';
 import TestContentInfoComponent from '../test-content-info';
 import { CaretRightOutlined, PlusOutlined } from '@ant-design/icons';
+import If from 'components/utils/If';
 
 const TestContentComponent = () => {
   const { color }: { color: ThemeColor } = useSelector((state: any) => state.theme);
@@ -36,15 +37,15 @@ const TestContentComponent = () => {
           color: colors[color][2],
         }}
         align="middle"
-        justify="space-between"
+        justify="start"
       >
         <Row style={{ cursor: 'pointer', padding: '0px 10px' }} onClick={() => setOrder(1)}>
           <CaretRightOutlined style={{ fontSize: '1.4EM' }} />
         </Row>
         <Row>Autenticação</Row>
-        <Row style={{ cursor: 'pointer', padding: '0px 10px' }}>
+        {/* <Row style={{ cursor: 'pointer', padding: '0px 10px' }}>
           <PlusOutlined style={{ fontSize: '1.3EM' }} />
-        </Row>
+        </Row> */}
       </Row>
       <Row
         style={{
@@ -54,9 +55,11 @@ const TestContentComponent = () => {
           color: colors[color][2],
         }}
       >
-        <Col>
-          <Foreach dataSource={tests} map={mapping} />
-        </Col>
+        <If check={!!tests.length}>
+          <Col span={24} style={{ overflowX: `auto`, textOverflow: `ellipsis`, whiteSpace: `nowrap` }}>
+            <Foreach dataSource={tests} map={mapping} />
+          </Col>
+        </If>
       </Row>
     </>
   );

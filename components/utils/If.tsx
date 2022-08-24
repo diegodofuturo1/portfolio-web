@@ -1,3 +1,4 @@
+import LoadingComponent from 'components/loading';
 import { PropsWithChildren } from 'react';
 
 interface IfProps {
@@ -5,7 +6,7 @@ interface IfProps {
 }
 
 const If = (props: PropsWithChildren<IfProps>) => {
-  return props.check ? (props.children as JSX.Element) : <span></span>;
+  return props.check ? (props.children as JSX.Element) : <LoadingComponent />;
 };
 
 export default If;

@@ -1,15 +1,11 @@
 import { Col, Row } from 'antd';
-import { useSelector } from 'react-redux';
-import colors from 'utils/colors';
-import { ThemeColor } from 'store/reducers/theme.reducer';
-import { LoadingOutlined, ClockCircleOutlined, CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
-import { TestDto } from 'dtos/request/test.dto';
-import { useState } from 'react';
 import service from 'service';
-import test from 'node:test';
-import next from 'next';
-import RequestApiResponseComponent from 'components/project/request-api/request-api-response';
+import { useEffect, useState } from 'react';
+import colors from 'utils/colors';
+import { TestDto } from 'dtos/request/test.dto';
 import { getCookie, setCookie } from 'cookies-next';
+import { LoadingOutlined, ClockCircleOutlined, CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import { openDrawer } from 'store/actions/user.action';
 
 export interface TestContentInfoComponentProps {
   test: TestDto;
@@ -18,22 +14,7 @@ export interface TestContentInfoComponentProps {
 }
 
 const TestContentInfoComponent = (props: TestContentInfoComponentProps) => {
-  const [error, setError] = useState(false);
-
-  const setStatus = () => {
-    if (props.order < props.test.order) {
-      return `clock`;
-    }
-    if (props.order == props.test.order) {
-      return `loading`;
-    }
-    if (error) {
-      return `close`;
-    }
-    return `check`;
-  };
-
-  const status: `close` | `check` | `clock` | `loading` = setStatus();
+  const [status, setStatus] = useState<`close` | `check` | `clock` | `loading`>(`clock`);
 
   const renderColor = () => {
     switch (status) {
@@ -61,31 +42,43 @@ const TestContentInfoComponent = (props: TestContentInfoComponentProps) => {
     }
   };
 
-  if (status == `loading`) {
-    const execute = async () => {
-      const endpoint = await service.request.getEndpointById(props.test.endpointId);
-      const params = await service.request.getTestParams(props.test.id);
+  useEffect(() => {
+    if (props.order === props.test.order) {
+      setStatus(`loading`);
+    }
+  }, [props.order]);
 
-      if (endpoint && params) {
-        const _response = await service.request.execute(endpoint, params, getCookie(`test-token`)?.toString());
-        const { statusCode, code, data } = _response;
+  useEffect(() => {
+    if (status == `loading`) {
+      const execute = async () => {
+        const endpoint = await service.request.getEndpointById(props.test.endpointId);
+        const params = await service.request.getTestParams(props.test.id);
 
-        if (data?.token) {
-          setCookie(`test-token`, data.token);
+        if (endpoint && params) {
+          const _response = await service.request.execute(endpoint, params, getCookie(`test-token`)?.toString());
+          const { statusCode, code, data } = _response;
+
+          if (data?.token) {
+            setCookie(`test-token`, data.token);
+          }
+
+          if (statusCode != props.test.expect && code != props.test.expect) {
+            setStatus(`close`);
+          } else {
+            setStatus(`check`);
+          }
+
+          props.next();
         }
-
-        if (statusCode != props.test.expect && code != props.test.expect) setError(true);
-
-        props.next();
-      }
-    };
-    execute();
-  }
+      };
+      execute();
+    }
+  }, [status]);
 
   return (
-    <Row align="middle" style={{ color: renderColor() }}>
-      <Row style={{ padding: `0px 10px` }}>{renderIcon()}</Row>
-      <Row>{props.test.text}</Row>
+    <Row align="middle" style={{ color: renderColor(), textOverflow: `ellipsis`, whiteSpace: `nowrap` }}>
+      <Col style={{ padding: `0px 10px` }}>{renderIcon()}</Col>
+      <Col span={21}>{props.test.text}</Col>
     </Row>
   );
 };

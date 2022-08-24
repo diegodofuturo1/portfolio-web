@@ -11,7 +11,7 @@ export default class Style {
   };
 
   row: CSSProperties = {
-    boxShadow: this.hover ? '1px 1px 2px 0px black' : '2px 2px 4px 0px black',
+    boxShadow: this.hover ? '1px 1px 6px 0px black' : '1px 1px 2px 0px black',
     cursor: 'pointer',
     backgroundColor: colors[this.color][4],
   };

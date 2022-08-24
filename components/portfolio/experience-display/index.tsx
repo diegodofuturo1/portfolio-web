@@ -21,6 +21,7 @@ class Style {
     color: colors[this.color][2],
     backgroundColor: colors[this.color][7],
     border: `1px solid ${colors[this.color][8]}`,
+    borderLeft: `10px solid ${colors[this.color][5]}`,
   };
 
   header: CSSProperties = {

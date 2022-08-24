@@ -22,7 +22,7 @@ const RequestApiIconComponent = (props: RequestApiButtonComponentProps) => {
           color: colors[color][1],
           fontWeight: 'bolder',
           height: '30px',
-          width: '100%',
+          width: `101%`,
         }}
       >
         {open ? <UpOutlined /> : <DownOutlined />}
