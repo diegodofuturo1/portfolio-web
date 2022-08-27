@@ -2,7 +2,7 @@ import LoadingComponent from 'components/loading';
 import { PropsWithChildren } from 'react';
 
 interface IfProps {
-  check: boolean;
+  check?: boolean;
 }
 
 const If = (props: PropsWithChildren<IfProps>) => {

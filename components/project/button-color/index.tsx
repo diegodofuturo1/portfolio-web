@@ -5,6 +5,7 @@ import { CheckOutlined } from '@ant-design/icons';
 import { Dispatcher } from 'store/dispathers';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeColor } from 'store/reducers/theme.reducer';
+import service from 'service';
 
 interface ButtonColorComponentProps {
   color: ThemeColor;
@@ -17,6 +18,11 @@ const ButtonColorComponent = (props: ButtonColorComponentProps) => {
   const [hover, setHover] = useState(false);
 
   const dispatcher = new Dispatcher(useDispatch());
+
+  const onClickHandler = () => {
+    dispatcher.theme.colorChange(props.color);
+    service.auth.saveUserPreferences(props.color);
+  };
 
   return (
     <Col
@@ -32,7 +38,7 @@ const ButtonColorComponent = (props: ButtonColorComponentProps) => {
       <Row
         justify="center"
         align="middle"
-        onClick={() => dispatcher.theme.colorChange(props.color)}
+        onClick={onClickHandler}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
         style={{
@@ -44,10 +50,7 @@ const ButtonColorComponent = (props: ButtonColorComponentProps) => {
           fontWeight: 'bolder',
           width: hover ? '98%' : '100%',
           border: color == props.color ? `1px solid ${colors[props.color][3]}` : undefined,
-          borderLeft:
-            color != props.color
-              ? `6px solid ${colors[props.color][7]}`
-              : `12px solid ${colors[props.color][3]}`,
+          borderLeft: color != props.color ? `6px solid ${colors[props.color][7]}` : `12px solid ${colors[props.color][3]}`,
         }}
       >
         <Col span={16} offset={4}>

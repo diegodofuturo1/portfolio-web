@@ -1,4 +1,5 @@
 import { THEME_COLOR_CHANGE } from 'store/actions/theme.action';
+import { isThemeColor } from 'utils/colors';
 
 export type ThemeColor =
   | 'red'
@@ -14,7 +15,6 @@ export type ThemeColor =
   | 'purple'
   | 'magenta'
   | 'gray';
-
 export interface ThemeState {
   color: ThemeColor;
 }
@@ -26,7 +26,10 @@ const initialState: ThemeState = {
 const reducer = (state: ThemeState = initialState, action: any) => {
   switch (action.type) {
     case THEME_COLOR_CHANGE:
-      return { ...state, color: action.payload };
+      if (isThemeColor(action.payload)) {
+        return { ...state, color: action.payload };
+      }
+      return state;
     default:
       return state;
   }

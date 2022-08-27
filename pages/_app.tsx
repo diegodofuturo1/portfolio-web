@@ -78,9 +78,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               <Row style={style.menu}>
                 <MenuItemComponent id="projects" icon={<ProjectOutlined />} text="Projetos" />
                 <MenuItemComponent id="about" icon={<InfoCircleOutlined />} text="Sobre Mim" />
-
                 <MenuItemComponent id="education" icon={<BookOutlined />} text="Educação" />
-
                 <MenuItemComponent id="experience" icon={<ExperimentOutlined />} text="Experiência" />
               </Row>
               <Component {...pageProps} />

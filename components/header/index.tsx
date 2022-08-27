@@ -45,6 +45,7 @@ const HeaderComponent = () => {
         const response = await service.auth.whoami();
         if (response) {
           dispatcher.user.currentUserChange(response.data);
+          dispatcher.theme.colorChange(response.data.theme || `gray`);
         }
       };
       execute();

@@ -1,4 +1,4 @@
-import { signin, signout, signup, whoami } from './auth';
+import { signin, signout, signup, whoami, saveUserPreferences } from './auth';
 import { getEndpoints, getParamsByEndpoint, execute, getTests, getEndpointById, getTestParams } from './request';
 
 // export const url = 'http://localhost:5000/';
@@ -10,6 +10,7 @@ export default {
     signup,
     signout,
     whoami,
+    saveUserPreferences,
   },
   request: {
     getEndpoints,

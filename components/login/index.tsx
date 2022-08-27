@@ -117,6 +117,11 @@ const LoginComponent = (props: LoginComponentProps) => {
     const user = await service.auth.signin({ email, password });
     if (user?.name) {
       dispatcher.user.currentUserChange(user);
+
+      if (user.theme) {
+        dispatcher.theme.colorChange(user.theme);
+      }
+
       message.success('Bem vindo ' + user.name);
       setVisible(false);
     }
@@ -168,7 +173,14 @@ const LoginComponent = (props: LoginComponentProps) => {
         <Row hidden={mode == 'SignIn'} style={style.label}>
           Name
         </Row>
-        <Input value={name} hidden={mode == 'SignIn'} onChange={(event) => setName(event.target.value)} type="name" size="small" style={style.input} />
+        <Input
+          value={name}
+          hidden={mode == 'SignIn'}
+          onChange={(event) => setName(event.target.value)}
+          type="name"
+          size="small"
+          style={style.input}
+        />
 
         <Row style={style.label}>Email</Row>
         <Input value={email} onChange={(event) => setEmail(event.target.value)} size="small" type="email" style={style.input} />

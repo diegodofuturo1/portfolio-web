@@ -51,7 +51,10 @@ const RequestApiComponent = (props: RequestApiComponentProps) => {
 
       setResponse(response);
 
-      if (endpoint.path === `auth/signin/` || endpoint.path === `auth/signup/`) dispather.user.currentUserChange(response.data);
+      if (endpoint.path === `auth/signin/` || endpoint.path === `auth/signup/`) {
+        dispather.user.currentUserChange(response.data);
+        dispather.theme.colorChange(response.data.theme || `gray`);
+      }
 
       if (endpoint.path === `auth/signout/`) dispather.user.currentUserExit();
 

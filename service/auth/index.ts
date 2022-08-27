@@ -4,6 +4,7 @@ import { message } from 'antd';
 import { getCookie } from 'cookies-next';
 import { SignInDto } from 'dtos/auth/signin.dto';
 import { SignUpDto } from 'dtos/auth/signup.dto';
+import { ThemeColor } from 'store/reducers/theme.reducer';
 
 export const signin = async ({ email, password }: SignInDto) => {
   try {
@@ -52,6 +53,19 @@ export const whoami = async () => {
   const options = { headers: { token } };
   try {
     const { data } = await axios.get(url + 'auth/whoami/', options);
+    return data;
+  } catch {}
+};
+
+export const saveUserPreferences = async (theme: ThemeColor) => {
+  const token = getCookie(`token`)?.toString();
+
+  if (!token) return;
+
+  const options = { headers: { token } };
+
+  try {
+    const { data } = await axios.put(url + 'auth/preferences/', { theme }, options);
     return data;
   } catch {}
 };
