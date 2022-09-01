@@ -1,7 +1,7 @@
 import { Input, Row } from 'antd';
 import { useSelector } from 'react-redux';
 import colors from 'utils/colors';
-import { PortifolioState } from 'store/reducers';
+import { ApplicationState } from 'store/reducers';
 import { ParamDto } from 'dtos/request/param.dto';
 import { Dispatch, SetStateAction } from 'react';
 
@@ -15,7 +15,7 @@ const RequestApiInput = (props: RequestApiInputProps) => {
 
   const {
     theme: { color },
-  } = useSelector((state: PortifolioState) => state);
+  } = useSelector((state: ApplicationState) => state);
 
   const saveParamHandler = (_value: string) => {
     const handler = (param: ParamDto) => {

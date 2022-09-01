@@ -3,7 +3,7 @@ import colors from 'utils/colors';
 import { Affix, Avatar, Row } from 'antd';
 import { Dispatcher } from 'store/dispathers';
 import LoginComponent from 'components/login';
-import { PortifolioState } from 'store/reducers';
+import { ApplicationState } from 'store/reducers';
 import { CSSProperties, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeColor } from 'store/reducers/theme.reducer';
@@ -34,7 +34,7 @@ const HeaderComponent = () => {
   const {
     theme: { color },
     user: { currentUser, drawer },
-  } = useSelector((state: PortifolioState) => state);
+  } = useSelector((state: ApplicationState) => state);
 
   const style = new Style(color);
   const dispatcher = new Dispatcher(useDispatch());

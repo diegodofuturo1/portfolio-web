@@ -1,12 +1,16 @@
 import 'antd/dist/antd.css';
 import { Layout } from 'antd';
 import { NextPage } from 'next';
-import { CSSProperties } from 'react';
+import { CSSProperties, useEffect } from 'react';
 import colors from 'utils/colors';
-import experiences from 'utils/texts/experience';
 import ExperienceComponent, { ExperienceComponentProps } from 'components/portfolio/experience-display';
 import { ThemeColor } from 'store/reducers/theme.reducer';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import If from 'components/utils/If';
+import Foreach from 'components/utils/Foreach';
+import { ApplicationState } from 'store/reducers';
+import { Dispatcher } from 'store/dispathers';
+import service from 'service';
 
 class Style {
   constructor(private readonly color: ThemeColor = 'gray') {}
@@ -34,14 +38,32 @@ class Style {
 }
 
 const ExperiencePage: NextPage = () => {
-  const { color } = useSelector((state: any) => state.theme);
+  const {
+    theme: { color },
+    portfolio: { id, experiences },
+  } = useSelector((state: ApplicationState) => state);
   const style = new Style(color);
+  const dispatcher = new Dispatcher(useDispatch());
+
+  useEffect(() => {
+    const execute = async () => {
+      if (id) {
+        const _experience = await service.portfolio.getExperience(id);
+        dispatcher.portfolio.saveExperience(_experience);
+      }
+    };
+
+    if (!experiences) execute();
+  }, [id]);
 
   return (
     <Layout style={style.layout}>
-      {experiences.map((experience: ExperienceComponentProps, index: number) => (
-        <ExperienceComponent key={`experience-component-${index}`} {...experience} />
-      ))}
+      <If check={!!(experiences && experiences.length)}>
+        <Foreach
+          dataSource={experiences ?? []}
+          map={(experience: ExperienceComponentProps, index: number) => <ExperienceComponent key={`experience-component-${index}`} {...experience} />}
+        />
+      </If>
     </Layout>
   );
 };

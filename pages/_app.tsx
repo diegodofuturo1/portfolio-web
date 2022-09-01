@@ -1,11 +1,17 @@
 import 'styles/globals.css';
 import colors from 'utils/colors';
-import { CSSProperties, useEffect } from 'react';
+import { CSSProperties } from 'react';
 import { storeWrapper } from 'store';
 import type { AppProps } from 'next/app';
 import MenuItemComponent from 'components/menuitem';
 import { Content, Footer } from 'antd/lib/layout/layout';
 import { Affix, Col, Layout, message, Row } from 'antd';
+import { ThemeColor } from 'store/reducers/theme.reducer';
+import { useDispatch, useSelector } from 'react-redux';
+import HeaderComponent from 'components/header';
+import { ApplicationState } from 'store/reducers';
+import service from 'service';
+import { Dispatcher } from 'store/dispathers';
 import {
   InfoCircleOutlined,
   BookOutlined,
@@ -17,63 +23,31 @@ import {
   GithubOutlined,
   ProjectOutlined,
 } from '@ant-design/icons';
-import { ThemeColor } from 'store/reducers/theme.reducer';
-import { useSelector } from 'react-redux';
-import HeaderComponent from 'components/header';
-
-class Style {
-  constructor(private readonly color: ThemeColor = 'gray') {}
-
-  col: CSSProperties = {
-    margin: '20px auto',
-    height: '100%',
-    boxShadow: '5px 5px 10px 0px black',
-  };
-
-  menu: CSSProperties = {
-    backgroundColor: colors[this.color][9],
-  };
-
-  layout: CSSProperties = {
-    backgroundColor: colors[this.color][7],
-    minHeight: '100vh',
-    minWidth: '400px',
-  };
-
-  footer: CSSProperties = {
-    padding: '0px',
-    color: colors.white,
-    backgroundColor: colors[this.color][9],
-  };
-
-  footeritem: CSSProperties = {
-    margin: '0px 20px',
-  };
-
-  icon: CSSProperties = {
-    color: colors.white,
-    backgroundColor: colors[this.color][9],
-    fontSize: '1.2EM',
-    margin: '10px 2px',
-  };
-
-  link: CSSProperties = {
-    color: colors.white,
-    cursor: 'pointer',
-    margin: '10px 2px',
-  };
-}
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { color } = useSelector((state: any) => state.theme);
+  const {
+    theme: { color },
+    portfolio,
+  } = useSelector((state: ApplicationState) => state);
+
   const style = new Style(color);
+  const dispatcher = new Dispatcher(useDispatch());
+
+  const execute = async () => {
+    const [_portfolio] = await service.portfolio.getPortfolio();
+    dispatcher.portfolio.savePortfolio(_portfolio);
+  };
+
+  if (!portfolio.id) {
+    execute();
+  }
 
   return (
-    <Row style={{ margin: '0px', height: '100%' }}>
+    <Row style={{ margin: '0px', minHeight: '100vh' }}>
       <Col span={24}>
         <Layout style={style.layout}>
           <HeaderComponent />
-          <Content style={{ minHeight: '100vh' }}>
+          <Content>
             <Col style={style.col} xs={{ span: 23 }} sm={{ span: 23 }} md={{ span: 23 }} lg={{ span: 20 }} xl={{ span: 16 }} xxl={{ span: 12 }}>
               <Row style={style.menu}>
                 <MenuItemComponent id="projects" icon={<ProjectOutlined />} text="Projetos" />
@@ -158,3 +132,46 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 export default storeWrapper.withRedux(MyApp);
+
+class Style {
+  constructor(private readonly color: ThemeColor = 'gray') {}
+
+  col: CSSProperties = {
+    margin: '20px auto',
+    height: '100%',
+    boxShadow: '5px 5px 10px 0px black',
+  };
+
+  menu: CSSProperties = {
+    backgroundColor: colors[this.color][9],
+  };
+
+  layout: CSSProperties = {
+    backgroundColor: colors[this.color][7],
+    minHeight: '100vh',
+    minWidth: '400px',
+  };
+
+  footer: CSSProperties = {
+    padding: '0px',
+    color: colors.white,
+    backgroundColor: colors[this.color][9],
+  };
+
+  footeritem: CSSProperties = {
+    margin: '0px 20px',
+  };
+
+  icon: CSSProperties = {
+    color: colors.white,
+    backgroundColor: colors[this.color][9],
+    fontSize: '1.2EM',
+    margin: '10px 2px',
+  };
+
+  link: CSSProperties = {
+    color: colors.white,
+    cursor: 'pointer',
+    margin: '10px 2px',
+  };
+}

@@ -1,12 +1,16 @@
 import 'antd/dist/antd.css';
 import { Layout } from 'antd';
 import { NextPage } from 'next';
-import { CSSProperties } from 'react';
+import { CSSProperties, useEffect, useState } from 'react';
 import colors from 'utils/colors';
-import educations from 'utils/texts/education';
 import { ThemeColor } from 'store/reducers/theme.reducer';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import EducationComponent, { EducationComponentProps } from 'components/portfolio/education-display';
+import If from 'components/utils/If';
+import Foreach from 'components/utils/Foreach';
+import { ApplicationState } from 'store/reducers';
+import service from 'service';
+import { Dispatcher } from 'store/dispathers';
 class Style {
   constructor(private readonly color: ThemeColor = 'gray') {}
 
@@ -18,15 +22,33 @@ class Style {
 }
 
 const EducationPage: NextPage = () => {
-  const { color } = useSelector((state: any) => state.theme);
+  const {
+    theme: { color },
+    portfolio: { id, educations },
+  } = useSelector((state: ApplicationState) => state);
 
   const style = new Style(color);
+  const dispatcher = new Dispatcher(useDispatch());
+
+  useEffect(() => {
+    const execute = async () => {
+      if (id) {
+        const _educations = await service.portfolio.getEducation(id);
+        dispatcher.portfolio.saveEducation(_educations);
+      }
+    };
+
+    if (!educations) execute();
+  }, [id]);
 
   return (
     <Layout style={style.layout}>
-      {educations.map((education: EducationComponentProps, index: number) => (
-        <EducationComponent key={`education-component-${index}`} {...education} />
-      ))}
+      <If check={!!(educations && educations.length)}>
+        <Foreach
+          dataSource={educations ?? []}
+          map={(education: EducationComponentProps, index: number) => <EducationComponent key={`education-component-${index}`} {...education} />}
+        />
+      </If>
     </Layout>
   );
 };

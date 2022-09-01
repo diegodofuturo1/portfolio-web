@@ -1,11 +1,16 @@
 import colors from 'utils/colors';
-import { CSSProperties } from 'react';
-import { useSelector } from 'react-redux';
+import { CSSProperties, useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { ThemeColor } from 'store/reducers/theme.reducer';
 import { Card, Col, Descriptions, Badge, Row } from 'antd';
 import SkillInfoComponent from 'components/portfolio/skill-info';
 import HeaderCardComponent from 'components/portfolio/card-header';
 import SkillComponent, { rating, SkillComponentProps } from 'components/portfolio/skill';
+import If from 'components/utils/If';
+import Foreach from 'components/utils/Foreach';
+import service from 'service';
+import { Dispatcher } from 'store/dispathers';
+import { SkillDto } from 'dtos/portfolio';
 
 class Style {
   constructor(private readonly color: ThemeColor = 'gray') {}
@@ -60,6 +65,7 @@ class Style {
 }
 
 export interface ExperienceComponentProps {
+  id: string;
   company: string;
   role: string;
   image: string;
@@ -73,7 +79,18 @@ export interface ExperienceComponentProps {
 const ExperienceComponent = (props: ExperienceComponentProps) => {
   const { color }: { color: ThemeColor } = useSelector((state: any) => state.theme);
   const style = new Style(color);
-  const { company, role, image, duration, from, to, details, skills } = props;
+  const { id, company, role, image, duration, from, to, details } = props;
+  const [skills, setSkills] = useState<SkillDto[]>([]);
+
+  useEffect(() => {
+    if (!skills.length) {
+      const execute = async () => {
+        const _skills = await service.portfolio.getSkill(id);
+        setSkills(() => _skills);
+      };
+      if (id) execute();
+    }
+  }, [id]);
 
   return (
     <Card style={style.card} headStyle={style.header} title={<HeaderCardComponent title={company} description={role} src={image} />}>
@@ -98,13 +115,16 @@ const ExperienceComponent = (props: ExperienceComponentProps) => {
           </Descriptions.Item>
         </Descriptions>
 
-        <Badge.Ribbon text={<SkillInfoComponent />} color={colors[color][5]}>
+        <Badge.Ribbon text={<SkillInfoComponent />} color={colors[color][5]} style={{ cursor: `pointer` }}>
           <Descriptions style={style.description} size="small">
             <Descriptions.Item style={style.descriptionItem} labelStyle={style.descriptionLabel} label="Habilidades">
               <Col style={style.descriptionContent}>
-                {skills.map((skill: SkillComponentProps, index: number) => (
-                  <SkillComponent key={`skill-component-${index}`} {...skill} />
-                ))}
+                <If check={!!(skills && skills.length)}>
+                  <Foreach
+                    dataSource={skills}
+                    map={(skill: SkillComponentProps, index: number) => <SkillComponent key={`skill-component-${index}`} {...skill} />}
+                  />
+                </If>
               </Col>
             </Descriptions.Item>
           </Descriptions>

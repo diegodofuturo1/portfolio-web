@@ -28,6 +28,17 @@ const ProjectPage: NextPage = () => {
   return (
     <Layout style={style.layout}>
       <Row>
+        {/* <ProjectItemComponent
+          // route="projects/test"
+          title="Quiz"
+          discription="Teste seus conhecimentos"
+          badge={
+            <>
+              <FormOutlined />
+              {'  Em breve'}
+            </>
+          }
+        />
         <ProjectItemComponent
           // route="projects/test"
           title="Tarefas"
@@ -38,7 +49,7 @@ const ProjectPage: NextPage = () => {
               {'  Em breve'}
             </>
           }
-        />
+        /> */}
         <ProjectItemComponent
           // route="projects/test"
           title="Banco de Dados"

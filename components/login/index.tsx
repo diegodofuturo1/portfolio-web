@@ -1,6 +1,6 @@
 import service from 'service';
 import colors from 'utils/colors';
-import { PortifolioState } from 'store/reducers';
+import { ApplicationState } from 'store/reducers';
 import { CSSProperties, ReactElement, useEffect, useState } from 'react';
 import { CloseOutlined, SaveOutlined, LoadingOutlined, LoginOutlined, LogoutOutlined, UserAddOutlined } from '@ant-design/icons';
 import { Dispatcher } from 'store/dispathers';
@@ -86,7 +86,7 @@ const LoginComponent = (props: LoginComponentProps) => {
   const {
     theme: { color },
     user: { currentUser },
-  } = useSelector((state: PortifolioState) => state);
+  } = useSelector((state: ApplicationState) => state);
 
   const dispatcher = new Dispatcher(useDispatch());
 

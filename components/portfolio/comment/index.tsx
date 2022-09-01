@@ -3,6 +3,8 @@ import { Comment, Avatar, Row } from 'antd';
 import { useSelector } from 'react-redux';
 import { ThemeColor } from 'store/reducers/theme.reducer';
 import colors from 'utils/colors';
+import { AboutDto } from 'dtos/portfolio';
+import Foreach from 'components/utils/Foreach';
 
 class Style {
   constructor(private readonly color: ThemeColor = 'gray') {}
@@ -12,7 +14,7 @@ class Style {
     backgroundColor: colors[this.color][6],
   };
 
-  comment: CSSProperties = {
+  about: CSSProperties = {
     width: '80%',
     margin: '10px auto',
     backgroundColor: colors[this.color][7],
@@ -28,29 +30,27 @@ class Style {
   };
 }
 
-export interface CommentComponentProps {
-  comments: { content: string; title: string }[];
+export interface AboutComponentProps {
+  abouts: AboutDto[];
 }
 
-const CommentComponent = (props: CommentComponentProps) => {
+const AboutComponent = (props: AboutComponentProps) => {
   const { color } = useSelector((state: any) => state.theme);
 
   const style = new Style(color);
 
-  const render = () => {
-    return props.comments.map((comment, index) => {
-      return (
-        <Comment
-          key={`portfolio-comment-${index}`}
-          style={style.comment}
-          content={<Row style={{ textAlign: `justify` }}>{comment.content}</Row>}
-          datetime={<span style={style.textcolor}>{comment.title}</span>}
-        />
-      );
-    });
+  const render = (about: AboutDto, index: number) => {
+    return (
+      <Comment
+        key={`portfolio-about-${index}`}
+        style={style.about}
+        content={<Row style={{ textAlign: `justify` }}>{about.content}</Row>}
+        datetime={<span style={style.textcolor}>{about.title}</span>}
+      />
+    );
   };
 
-  return <>{render()}</>;
+  return <Foreach dataSource={props.abouts} map={render} />;
 };
 
-export default CommentComponent;
+export default AboutComponent;

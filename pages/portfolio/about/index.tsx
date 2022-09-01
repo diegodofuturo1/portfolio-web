@@ -1,12 +1,53 @@
 import 'antd/dist/antd.css';
 import { Image, Layout, Row } from 'antd';
 import { NextPage } from 'next';
-import { CSSProperties } from 'react';
+import { CSSProperties, useEffect } from 'react';
 import colors from 'utils/colors';
-import about from 'utils/texts/about';
 import { ThemeColor } from 'store/reducers/theme.reducer';
-import { useSelector } from 'react-redux';
-import CommentComponent from 'components/portfolio/comment';
+import { useDispatch, useSelector } from 'react-redux';
+import AboutComponent from 'components/portfolio/comment';
+import If from 'components/utils/If';
+import { ApplicationState } from 'store/reducers';
+import service from 'service';
+import { Dispatcher } from 'store/dispathers';
+
+const AboutPage: NextPage = () => {
+  const {
+    theme: { color },
+    portfolio: { id, abouts },
+  } = useSelector((state: ApplicationState) => state);
+  const style = new Style(color);
+  const dispatcher = new Dispatcher(useDispatch());
+
+  useEffect(() => {
+    const execute = async () => {
+      if (id) {
+        const _abouts = await service.portfolio.getAbouts(id);
+        dispatcher.portfolio.saveAbout(_abouts);
+      }
+    };
+
+    if (!abouts) execute();
+  }, [id]);
+
+  console.log(abouts);
+
+  return (
+    <Layout style={style.layout}>
+      <If check={!!(abouts && abouts.length)}>
+        <Row justify="center">
+          <Image style={style.image} alt="diego-heleno.png" src="https://diegoheleno.s3.us-east-2.amazonaws.com/public/diego-heleno.jpg" />
+        </Row>
+        <Row style={style.name} justify="center">
+          Diego Heleno da Silva
+        </Row>
+        <AboutComponent abouts={abouts ?? []}></AboutComponent>
+      </If>
+    </Layout>
+  );
+};
+
+export default AboutPage;
 
 class Style {
   constructor(private readonly color: ThemeColor = 'gray') {}
@@ -44,26 +85,3 @@ class Style {
     fontSize: '2EM',
   };
 }
-
-const AboutPage: NextPage = () => {
-  const { color } = useSelector((state: any) => state.theme);
-  const style = new Style(color);
-
-  return (
-    <Layout style={style.layout}>
-      <Row justify="center">
-        <Image
-          style={style.image}
-          alt="diego-heleno.png"
-          src="https://diegoheleno.s3.us-east-2.amazonaws.com/public/diego-heleno.jpg"
-        />
-      </Row>
-      <Row style={style.name} justify="center">
-        Diego Heleno da Silva
-      </Row>
-      <CommentComponent comments={about}></CommentComponent>
-    </Layout>
-  );
-};
-
-export default AboutPage;

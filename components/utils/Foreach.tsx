@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 interface ForeachProps<T> {
   dataSource: T[];
-  map: (data: T) => ReactNode;
+  map: (data: T, index: number) => ReactNode;
 }
 
 const Foreach = (props: ForeachProps<any>) => {
